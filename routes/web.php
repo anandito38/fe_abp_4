@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::any('{any}', function () {
+    // return view('error.404');
+    return response()->json([
+        'status' => 'error',
+        'message' => 'Page not found',
+    ])->setStatusCode(404);
+})->where('any', '.*');

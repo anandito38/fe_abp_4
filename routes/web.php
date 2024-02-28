@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::any('{any}', function () {
-    // return view('error.404');
+    // return view('errors.404');
     return response()->json([
         'status' => 'error',
         'message' => 'Page not found',

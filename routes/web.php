@@ -24,9 +24,13 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 });
+Route::get('/test', function () {
+    return view('test');
+});
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login');
+    Route::post('/logout', 'logout');
 });
 
 Route::any('{any}', function () {

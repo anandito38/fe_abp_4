@@ -24,8 +24,11 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/test', function () {
-    return view('test');
+Route::get('/index', function () {
+    return view('index');
+});
+Route::get('/about', function () {
+    return view('about');
 });
 
 Route::controller(AuthController::class)->group(function(){

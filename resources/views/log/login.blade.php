@@ -15,15 +15,15 @@
             @csrf
             @method('post')
             <div class="field">
-                  <input type="text" required>
+                  <input type="text" name="nickname" required>
                   <label>Nama</label>
             </div>
             <div class="field">
-               <input type="email" required>
+               <input type="email" name="email" required>
                <label>Email Address</label>
             </div>
             <div class="field">
-               <input type="password" required>
+               <input type="password" name="password" required>
                <label>Password</label>
             </div>
          

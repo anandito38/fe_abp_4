@@ -29,7 +29,7 @@ class AuthController extends Controller
             if ($data['status'] == 'success'){
                 setcookie('token', $data['data']['data']['token'], time() + 606024, '/', '', false, true);
                 // toastr()->info('Login successfully!', 'Authentication', ['timeOut' => 3000]);
-                return view('test');
+                return view('index');
             }else{
                 // toastr()->error('Invalid email or password!', 'Authentication', ['timeOut' => 3000]);
                 return view('/login');

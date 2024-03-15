@@ -18,17 +18,17 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/index');
 });
 
 Route::get('/login', function () {
-    return view('login');
+    return view('log.login');
 });
 Route::get('/index', function () {
     return view('index');
 });
-Route::get('/about', function () {
-    return view('about');
+Route::get('/register', function () {
+    return view('log.register');
 });
 
 Route::controller(AuthController::class)->group(function(){

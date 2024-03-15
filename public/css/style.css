@@ -110,7 +110,8 @@ a:focus {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background-image: url(../images/hero-bg.jpg);
+  /* background-image: url(../images/hero-bg.jpg); */
+  background-color: #861c1e;
   background-size: cover;
   background-position: center bottom;
   background-repeat: no-repeat;
@@ -204,11 +205,11 @@ a:focus {
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 3;
+  z-index: 3; 
   top: 0;
   left: 0;
   background-color: black;
-  background-color: rgba(72, 85, 254, 0.95);
+  background-color: #b93537;
   overflow-x: hidden;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -514,6 +515,7 @@ a:focus {
   transition: all 0.3s;
   border: 1px solid #ffe537;
   outline: none;
+  margin-bottom: 20px;
 }
 
 .recipe_section .btn-box a:hover {
@@ -522,7 +524,8 @@ a:focus {
 }
 
 .app_section {
-  background-image: url(../images/app-bg.png);
+  /* background-image: url(../images/app-bg.png); */
+  background-color: #861c1e;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center center;
@@ -698,7 +701,8 @@ a:focus {
 }
 
 .footer_container {
-  background-image: url(../images/footer-bg.png);
+  /* background-image: url(../images/footer-bg.png); */
+  background-color: #861c1e;
   background-size: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -710,7 +714,7 @@ a:focus {
 .info_section {
   color: #ffffff;
   padding: 45px 0;
-  background-color: #070e6a;
+  background-color: #b74244;
 }
 
 .info_section .contact_box {
@@ -785,7 +789,7 @@ a:focus {
 .footer_section {
   position: relative;
   text-align: center;
-  background-color: #070e6a;
+  background-color: #861c1e;
 }
 
 .footer_section p {

@@ -88,10 +88,10 @@
           <div class="col-lg-10 mx-auto">
             <div class="detail-box">
               <h1>
-                Discover Restuarant And Food
+                KANTIN TULT
               </h1>
               <p>
-                when looking at its layout. The point of using Lorem Ipsum
+                Makan enak, murah, dan sehat
               </p>
             </div>
             <div class="find_container ">

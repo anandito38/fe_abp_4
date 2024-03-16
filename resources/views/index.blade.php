@@ -69,9 +69,9 @@
             </div>
             <div id="myNav" class="overlay">
               <div class="overlay-content">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="blog.html">Blog</a>
+                <a href="/">Home</a>
+                <a href="/">About</a>
+                <a href="shop">Toko</a>
                 <a href="testimonial.html">Testimonial</a>
               </div>
             </div>

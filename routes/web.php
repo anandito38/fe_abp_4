@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return redirect('/login');
 // });
+Route::group(['namespace' => 'App\Http\Controllers'], function()
+{  
+    Route::get('/shop', 'controller_test@getAllShops');
+    Route::get('/isi/{id}', 'controller_test@isiShops');
+
+});
 
 Route::get('/', function () {
     return redirect('/index');
@@ -36,6 +42,11 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/logout', 'logout');
 });
 
+Route::get('/test', function () {
+    return view('login');
+});
+
 Route::any('{any}', function () {
     return view('errors.404');
 })->where('any', '.*');
+

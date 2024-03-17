@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,27 +28,28 @@ Route::get('/', function () {
     return redirect('/index');
 });
 
-Route::get('/login', function () {
-    return view('log.login');
-});
-Route::get('/index', function () {
-    return view('index');
-});
-Route::get('/register', function () {
-    return view('log.register');
-});
-
 Route::controller(AuthController::class)->group(function(){
-    Route::post('/login', 'login')->middleware('guest');
-    Route::post('/logout', 'logout');
+    Route::post('/login', 'login')->name('login')->middleware('guest');
+    Route::post('/index', 'getUserInfo')->name('getUserInfo')->middleware('auth:sanctum');
+    Route::post('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
 });
 
-Route::get('/test', function () {
-    return view('login');
-});
+Route::group([], function(){
+    Route::get('/login', function () {
+        if (Auth::check()) {
+            return redirect('/panel');
+        } else {
+            return view('log.login');
+        }
+    });
 
-Route::get('/dito', function () {
-    return view('layout');
+    Route::get('/index', function () {
+        return view('index');
+    });
+
+    Route::get('/panel', function () {
+        return view('panel');
+    });
 });
 
 Route::any('{any}', function () {

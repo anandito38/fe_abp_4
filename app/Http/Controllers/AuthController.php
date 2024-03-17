@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Exception;
+use App\Utils\GetUserInfo;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,7 @@ class AuthController extends Controller
                 if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller') {
                     setcookie('token', $data['data']['data']['token'], time() + 3600, '/', '', false, true);
                     notify()->success('Login success!', 'Authentication');
-                    return view('welcome');
+                    return redirect('/panel');
                 } else {
                     notify()->error('Login failed!', 'Authentication');
                     return view('log.login');
@@ -47,19 +48,34 @@ class AuthController extends Controller
         }
     }
 
-    // public function logout(Request $request){
-    //     try{
-    //         $headers = [ 
-    //             'Accept' => 'application/json', 
-    //             'Authorization' => 'Bearer '.$token
-    //         ];
+    public function logout(){
+        try{
+            $token = $_COOKIE['token'];
 
-    //         $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/logout');
-    //         $data = $response->json();
+            $headers = [ 
+                'Accept' => 'application/json', 
+                'Authorization' => 'Bearer '.$token
+            ];
 
-    //     }catch(Exception $error){
-    //         return "Error: ".$error->getMessage();
-    //     }
-    // }
+            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/logout');
+            $data = $response->json();
+
+            if ($data['status'] == 'success') {
+                notify()->success('Logout successfully!', 'Authentication');
+                return redirect('/index');
+            } else {
+                return view('/panel', ['data' => $data['message']]);
+            }
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
+    public function getUserInfo(){
+        $user = GetUserInfo::getUserInfo();
+
+        return view('index', ['data' => $user['data']]);
+    }
     
 }

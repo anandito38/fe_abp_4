@@ -80,7 +80,6 @@
             @if($owner)
             <p>Pemilik: {{ $owner->fullName }}</p>
             @endif
-            <!-- Tambahkan informasi lainnya sesuai kebutuhan -->
         </div>
         @else
         <p>Toko tidak ditemukan.</p>

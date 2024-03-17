@@ -38,7 +38,7 @@ Route::get('/register', function () {
 });
 
 Route::controller(AuthController::class)->group(function(){
-    Route::post('/login', 'login');
+    Route::post('/login', 'login')->middleware('guest');
     Route::post('/logout', 'logout');
 });
 

@@ -12,17 +12,17 @@ class controller_test extends Controller
         $shops = DB::select('select * from shops');
         return view('shop',['shops'=>$shops]);
     }
-    // public function isiShops($id)
-    // {
-    //     $shop = DB::table('shops')->where('id', $id)->first();
-    //     return view('isi', ['shop' => $shop]);
-    // }
     public function isiShops($id)
     {
         $shop = DB::table('shops')->where('id', $id)->first();
         $owner = DB::table('users')->where('id', $shop->user_id)->first();
 
         return view('isi', ['shop' => $shop, 'owner' => $owner]);
+    }
+    public function getAllMenu()
+    {
+        $menus = DB::select('select * from menus');
+        return view('menus',['menus'=>$menus]);
     }
 
 }

@@ -46,6 +46,10 @@ Route::get('/test', function () {
     return view('login');
 });
 
+Route::get('/dito', function () {
+    return view('layout');
+});
+
 Route::any('{any}', function () {
     return view('errors.404');
 })->where('any', '.*');

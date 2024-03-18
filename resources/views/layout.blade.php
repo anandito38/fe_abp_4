@@ -12,7 +12,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Tel-U Cafetaria</title>
-
+    @notifyCss
     <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -26,6 +26,7 @@
 </head>
 
 <body id="page-top">
+    <x-notify::notify />
     <div id="wrapper">
         {{-- @php
         $data1 = $userInfo;
@@ -230,12 +231,15 @@
                     <div class="modal-body black-text">Select "Log out" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/logout">Log out</a>
+                        <form method="GET" action="/logoutt">
+                            <button type="submit" class="btn btn-primary">Log out</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
 
+        @notifyJs
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 

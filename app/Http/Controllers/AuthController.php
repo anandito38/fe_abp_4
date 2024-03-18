@@ -29,14 +29,14 @@ class AuthController extends Controller
             if ($data['status'] == 'success' && isset($data['data']['data']) && isset($data['data']['data']['role'])) {
                 if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller') {
                     setcookie('token', $data['data']['data']['token'], time() + 3600, '/', '', false, true);
-                    notify()->success('Login success!', 'Authentication');
+                    notify()->success('Login successfully!', 'Authentication');
                     return redirect('/panel');
                 } else {
                     notify()->error('Login failed!', 'Authentication');
                     return view('log.login');
                 }
-            }else if($data['status'] == 'success' && $data['data']['data']['message'] == 'This account already logged in'){
-                notify()->error('This account already logged in', 'Authentication');
+            }else if($data['status'] == 'success' && $data['data']['message'] == 'This account already logged in'){
+                notify()->info('This account already logged in', 'Authentication');
                 return view('log.login');
             } else {
                 notify()->error('Invalid credentials', 'Authentication');
@@ -52,19 +52,21 @@ class AuthController extends Controller
         try{
             $token = $_COOKIE['token'];
 
-            $headers = [ 
-                'Accept' => 'application/json', 
+            $headers = [
+                'Accept' => 'application\json',
                 'Authorization' => 'Bearer '.$token
             ];
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/logout');
+
             $data = $response->json();
 
             if ($data['status'] == 'success') {
-                notify()->success('Logout successfully!', 'Authentication');
+                setcookie('token', '', time() - 3600, '/', '', false, true);
+                notify()->error('Logout successfully!', 'Authentication');
                 return redirect('/index');
             } else {
-                return view('/panel', ['data' => $data['message']]);
+                return view('panel', ['data' => $data['message']]);
             }
 
         }catch(Exception $error){
@@ -75,7 +77,7 @@ class AuthController extends Controller
     public function getUserInfo(){
         $user = GetUserInfo::getUserInfo();
 
-        return view('index', ['data' => $user['data']]);
+        return view('panel', ['data' => $user['data']]);
     }
     
 }

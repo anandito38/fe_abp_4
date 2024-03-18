@@ -19,7 +19,7 @@ class RedirectIfNotAuthenticated
         if (Auth::guard('sanctum')->check()) {
             return $next($request);
         } else {
-            notify()->info('This account already logged in', 'Authentication');
+            toastr()->info('Please login first!', 'Authentication', ['timeOut' => 3000]);
             return redirect('/login');
         }
     }

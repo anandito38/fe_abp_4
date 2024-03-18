@@ -17,8 +17,8 @@ class RedirectIfTokenValid
     public function handle(Request $request, Closure $next, $guard = null): Response
     {
         if (Auth::guard($guard)->check()) {
-            notify()->error('This account already logged in', 'Authentication');
-            return redirect('/dashboard');
+            toastr()->info('You are already logged in!', 'Authentication', ['timeOut' => 3000]);
+            return redirect('/panel');
         }
 
         return $next($request);

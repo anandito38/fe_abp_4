@@ -30,18 +30,19 @@ Route::get('/', function () {
 });
 
 Route::controller(AuthController::class)->group(function(){
-    Route::post('/login', 'login')->name('login')->middleware('guest');
-    Route::post('/index', 'getUserInfo')->name('getUserInfo')->middleware('auth:sanctum');
-    Route::post('/logout', 'logout')->name('logout')->middleware('auth:sanctum');
+    Route::post('/login', 'login')->middleware('guest');
+    Route::post('/panel', 'getUserInfo');
+    Route::get('/logoutt', 'logout');
 });
 
 Route::group([], function(){
     Route::get('/login', function () {
-        if (Auth::check()) {
-            return redirect('/panel');
-        } else {
-            return view('log.login');
-        }
+        return view('log.login');
+        // if (Auth::check()) {
+        //     return redirect('/panel');
+        // } else {
+        //     return view('log.login');
+        // }
     });
 
     Route::get('/index', function () {

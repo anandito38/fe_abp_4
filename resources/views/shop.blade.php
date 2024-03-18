@@ -16,13 +16,13 @@
 
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="cssNew/bootstrap.css" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
 
   <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
+  <link href="cssNew/font-awesome.min.css" rel="stylesheet" />
   <!-- nice select -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha256-mLBIhmBvigTFWPSCtvdu6a76T+3Xyt+K571hupeFLg4=" crossorigin="anonymous" />
   <!-- slidck slider -->
@@ -31,9 +31,9 @@
 
 
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="cssNew/style.css" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link href="cssNew/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -183,11 +183,13 @@
         @foreach ($shops as $shop)
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
-            <a href="isi/{{ $shop->id }}" class="shop-link">
+            {{-- <a href="isi/{{ $shop->id }}" class="shop-link"> --}}
+            <a href="/menu" class="shop-link">
             {{-- <a href="{{ route('login', ['shops'=>$shop]) }}" class="shop-link"> --}}
             <div class="img-box">
               <img src="images/r1.jpg" class="box-img" alt="">
             </div>
+            </a>
             <div class="detail-box">
               <h4>
                 {{ $shop->nomorToko }}.
@@ -210,15 +212,15 @@
   </section>
 
   <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="jsNew/jquery-3.4.1.min.js"></script>
   <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
+  <script src="jsNew/bootstrap.js"></script>
   <!-- slick  slider -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
   <!-- nice select -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js" integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
   <!-- custom js -->
-  <script src="js/custom.js"></script>
+  <script src="jsNew/custom.js"></script>
 
 
 </body>

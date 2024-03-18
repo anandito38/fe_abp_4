@@ -70,7 +70,7 @@
             <div id="myNav" class="overlay">
               <div class="overlay-content">
                 <a href="/">Home</a>
-                <a href="/">About</a>
+                <a href="/">Menu</a>
                 <a href="shop">Toko</a>
                 <a href="testimonial.html">Testimonial</a>
               </div>

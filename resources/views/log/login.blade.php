@@ -24,8 +24,7 @@
             <div class="field">
                <input type="password" name="password" id="password" required>
                <div style="margin-right: 10px">
-                  <i class="bi bi-eye-slash"  style="float:inline-end; margin-top:-40px; margin-left:110px; position: relative"></i>
-                  {{-- id="togglePassword" --}}
+                  <i class="bi bi-eye-slash"  style="float:inline-end; margin-top:-40px; margin-left:110px; position: relative" id="togglePassword"></i>
                </div>
                <label for="password">Password</label>
             </div>
@@ -37,7 +36,7 @@
             </div>
       </form>
    </div>
-   {{-- <script>
+   <script>
       const togglePassword = document.querySelector("#togglePassword");
       const password = document.querySelector("#password");
 
@@ -48,17 +47,7 @@
          this.classList.toggle("bi-eye");
          this.classList.toggle("bi-eye-slash");
       });
-
-    // Prevent form submission
-      const loginForm = document.querySelector("form");
-      loginForm.addEventListener('submit', function (e) {
-        // You can add login logic here if needed
-        // For example, if you want to show an alert when form is submitted:
-         // alert('Login button clicked!');
-        // Prevent form from being submitted
-         e.preventDefault();
-      });
-   </script> --}}
+   </script>
 
 
 </body>

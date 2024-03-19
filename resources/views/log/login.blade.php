@@ -25,7 +25,6 @@
                <input type="password" name="password" id="password" required>
                <div style="margin-right: 10px">
                   <i class="bi bi-eye-slash"  style="float:inline-end; margin-top:-40px; margin-left:110px; position: relative" id="togglePassword"></i>
-                  {{-- id="togglePassword" --}}
                </div>
                <label for="password">Password</label>
             </div>

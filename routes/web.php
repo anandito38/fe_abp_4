@@ -22,6 +22,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('/shop', 'controller_test@getAllShops');
     Route::get('/isi/{id}', 'controller_test@isiShops');
     Route::get('/menu', 'controller_test@getAllMenu');
+    Route::get('/menu/{id}', 'controller_test@getAllMenu');
 
 });
 

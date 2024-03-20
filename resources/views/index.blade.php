@@ -115,7 +115,7 @@
                 Breakfast
               </h4>
               <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                <i class="fa fa-arrow-right" aria-hidden="true" ></i>
               </a>
             </div>
           </div>
@@ -222,8 +222,8 @@
             <p>
               Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
             </p>
-            <a href="">
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            <a href="" >
+                <i class="fa fa-arrow-right" aria-hidden="true" ></i>
             </a>
           </div>
         </div>

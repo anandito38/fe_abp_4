@@ -19,9 +19,15 @@ class controller_test extends Controller
 
         return view('isi', ['shop' => $shop, 'owner' => $owner]);
     }
-    public function getAllMenu()
+    public function getAllMenu($id)
     {
-        $menus = DB::select('select * from menus');
+    //     $menus = DB::table('menus')->where('user_id', $id)->first();
+    
+    // // Check if menu exists
+    //     if (!$menus) {
+    //         abort(404); // Or handle the case where menu is not found
+    //     }
+        $menus = DB::select('select * from menus where shop_id = ?', [$id]);
         return view('menus',['menus'=>$menus]);
     }
 

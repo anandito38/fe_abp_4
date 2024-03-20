@@ -11,7 +11,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Delfood</title>
+  <title>Telyu Canteen</title>
 
 
   <!-- bootstrap core css -->

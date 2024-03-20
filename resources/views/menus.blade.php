@@ -29,9 +29,9 @@
             </a>
             <div class="detail-box">
               <h4>
-                {{ $menu->nama_menu }}.
+                {{ $menu->namaMenu }}.
                 <br>
-                {{ $menu->deskripsi_menu }}
+                {{ $menu->hargaMenu }}
               </h4>
             </div>
           </div>

@@ -22,7 +22,7 @@
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             {{-- <a href="isi/{{ $shop->id }}" class="shop-link"> --}}
-            <a href="/menu" class="shop-link">
+            <a href="/menu/{{ $shop->id }}" class="shop-link">
             {{-- <a href="{{ route('login', ['shops'=>$shop]) }}" class="shop-link"> --}}
             <div class="img-box">
               <img src="images/r1.jpg" class="box-img" alt="">

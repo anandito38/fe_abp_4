@@ -16,14 +16,13 @@ class MenuController extends Controller
                 'Accept' => 'application\json',
                 'Authorization' => 'Bearer '.$token
             ];
-            dd($headers);
 
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all');
 
             $data = $response->json();
-            dd($data);
+            // dd($data);
             if ($data['status'] == 'success') {
-                return view('menus',['menus'=>$data['data']]);
+                return view('menusAll',['menus'=>$data['data']]);
             } else {
                 return view('errors.404');
             }

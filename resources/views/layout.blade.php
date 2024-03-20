@@ -44,7 +44,7 @@
             <hr class="sidebar-divider my-0">
 
             <li class="nav-item active">
-                <a class="nav-link" href="/dashboard">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>DASHBOARD</span></a>
             </li>
@@ -204,7 +204,7 @@
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto black-text bold">
                             {{-- <span>Copyright &copy; KANTIN TULT 2024</span> --}}
-                            <span>TEL-U CAFETARIA 2024</span>
+                            <span>TEL-U CANTEEN</span>
                         </div>
                     </div>
                 </footer>

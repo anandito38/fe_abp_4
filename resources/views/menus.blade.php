@@ -1,12 +1,13 @@
 @extends('layout.app-master')
 
 @section('content')
-
+  {{-- @php
+    dd($menus)
+  @endphp --}}
   <div class="hero_area">
     <!-- header section strats -->
     @include('layout.navbar')
   </div>
-
 
   <!-- recipe section -->
 
@@ -14,24 +15,27 @@
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
         <h2>
-          Menu Toko
+          Menu Kantin
         </h2>
       </div>
       <div class="row">
         @foreach ($menus as $menu)
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
-              <a  data-toggle="modal" data-target="#modalConfirmDelete">
+            <a  data-toggle="modal" data-target="#modalConfirmDelete">
             <div class="img-box">
-              <img src="images/about-img.jpg" class="box-img" alt="">
+              <img src="{{ asset('images/about-img.jpg')}}" class="box-img" alt="">
             </div>
             </a>
             <div class="detail-box">
               <h4>
-                {{ $menu->namaMenu }}.
+                {{ $menu['namaMenu'] }}.
                 <br>
-                {{ $menu->hargaMenui }}
+                {{ $menu['hargaMenu'] }}
               </h4>
+              <h6>
+                {{ $menu['deskripsiMenu'] }}</h6>
+                {{ $menu['shop_namaToko'] }}
             </div>
           </div>
         </div>

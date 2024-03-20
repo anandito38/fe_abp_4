@@ -479,7 +479,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #4855fe;
+  background-color: #861c1e;
   border-radius: 100%;
   font-size: 12px;
   color: #ffffff;
@@ -488,7 +488,7 @@ a:focus {
 }
 
 .recipe_section .box .detail-box a:hover {
-  background-color: #ffe537;
+  background-color: #ff6355;
   color: #000000;
 }
 

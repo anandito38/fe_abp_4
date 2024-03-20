@@ -27,6 +27,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
 });
 
+// Route::get('/menu', function () {
+//     return view('menus');
+// });
+
 Route::get('/', function () {
     return redirect('/index');
 });

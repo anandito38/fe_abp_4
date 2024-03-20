@@ -1,12 +1,13 @@
 @extends('layout.app-master')
 
 @section('content')
+  {{-- @php
+    dd($menus)
+  @endphp --}}
   <div class="hero_area">
     <!-- header section strats -->
     @include('layout.navbar')
-    <!-- end header section -->
   </div>
-
 
   <!-- recipe section -->
 
@@ -14,28 +15,29 @@
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
         <h2>
-          Kunjungi Toko Kami
+          Menu Kantin
         </h2>
       </div>
       <div class="row">
-        @foreach ($shops as $shop)
+        @foreach ($menus as $menu)
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
-            {{-- <a href="isi/{{ $shop->id }}" class="shop-link"> --}}
-            <a href="/shop/{{ $shop->id }}" class="shop-link">
-            {{-- <a href="{{ route('login', ['shops'=>$shop]) }}" class="shop-link"> --}}
+            <a  href="/shop/{{ $menu['shop_id'] }}">
             <div class="img-box">
-              <img src="images/r1.jpg" class="box-img" alt="">
+              <img src="{{ asset('images/about-img.jpg')}}" class="box-img" alt="">
             </div>
             </a>
             <div class="detail-box">
               <h4>
-                {{ $shop->nomorToko }}.
-                {{ $shop->namaToko }}
+                {{ $menu['namaMenu'] }}.
+                <br>
+                {{ $menu['hargaMenu'] }}
               </h4>
-              {{-- <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a> --}}
+              <h6>
+                {{ $menu['deskripsiMenu'] }} dari
+                {{ $menu['shop_namaToko'] }}
+              </h6>
+              <a href="/shop/{{ $menu['shop_id'] }}">Go</a>
             </div>
           </div>
         </div>
@@ -48,4 +50,5 @@
       </div> --}}
     </div>
   </section>
+
 @endsection

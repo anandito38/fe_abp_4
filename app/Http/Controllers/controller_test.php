@@ -21,13 +21,10 @@ class controller_test extends Controller
     }
     public function getAllMenu($id)
     {
-    //     $menus = DB::table('menus')->where('user_id', $id)->first();
-    
-    // // Check if menu exists
-    //     if (!$menus) {
-    //         abort(404); // Or handle the case where menu is not found
-    //     }
-        $menus = DB::select('select * from menus where shop_id = ?', [$id]);
+        $menus = DB::table('menus')->where('shop_id', $id)->first();
+        var_dump($menus->namaMenu);
+        dd($menus);
+        
         return view('menus',['menus'=>$menus]);
     }
 

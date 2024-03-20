@@ -21,7 +21,6 @@
         @foreach ($menus as $menu)
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
-            {{-- <a  data-bs-toggle="modal" data-bs-target="#pilihMenu"> --}}
               <a  data-toggle="modal" data-target="#modalConfirmDelete">
             <div class="img-box">
               <img src="images/about-img.jpg" class="box-img" alt="">
@@ -31,7 +30,7 @@
               <h4>
                 {{ $menu->namaMenu }}.
                 <br>
-                {{ $menu->hargaMenu }}
+                {{ $menu->hargaMenui }}
               </h4>
             </div>
           </div>

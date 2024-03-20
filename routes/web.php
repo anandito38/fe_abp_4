@@ -21,8 +21,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 {  
     Route::get('/shop', 'controller_test@getAllShops');
     Route::get('/isi/{id}', 'controller_test@isiShops');
-    Route::get('/menu', 'controller_test@getAllMenu');
-    Route::get('/menu/{id}', 'controller_test@getAllMenu');
+    // Route::get('/menu', 'controller_test@getAllMenu');
+    // Route::get('/menu/{id}', 'controller_test@getAllMenu');
 
 });
 
@@ -35,6 +35,10 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/panel', 'getUserInfo');
     Route::get('/logoutt', 'logout');
     Route::get('/index', 'AuthDashboard');
+});
+Route::controller(MenuController::class)->group(function(){
+    Route::get('/menu/all', 'getAllMenu');
+    // Route::get('/index', 'AuthDashboard');
 });
 
 Route::group([], function(){
@@ -50,6 +54,8 @@ Route::group([], function(){
     Route::get('/panel', function () {
         return view('panel');
     });
+
+
 });
 
 Route::any('{any}', function () {

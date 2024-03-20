@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Exception;
+use App\Utils\GetUserInfo;
 
 class AuthController extends Controller
 {

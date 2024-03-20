@@ -33,6 +33,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->middleware('guest');
     Route::post('/panel', 'getUserInfo');
     Route::get('/logoutt', 'logout');
+    Route::get('/index', 'AuthDashboard');
 });
 
 Route::group([], function(){
@@ -43,10 +44,6 @@ Route::group([], function(){
         // } else {
         //     return view('log.login');
         // }
-    });
-
-    Route::get('/index', function () {
-        return view('index');
     });
 
     Route::get('/panel', function () {

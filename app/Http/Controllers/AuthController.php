@@ -9,7 +9,6 @@ use App\Utils\GetUserInfo;
 
 class AuthController extends Controller
 {
-    //
     public function login(Request $request){
         try{
             $headers = [
@@ -79,6 +78,34 @@ class AuthController extends Controller
         $user = GetUserInfo::getUserInfo();
 
         return view('panel', ['data' => $user['data']]);
+    }
+
+    public function AuthDashboard(){
+        if (!isset($_COOKIE['token'])) {
+            return view('index');
+        }
+
+        $token = $_COOKIE['token'];
+
+        $headers = [
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer '.$token
+        ];
+
+        try {
+            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/token/test');
+            $user = $user = GetUserInfo::getUserInfo();
+
+            $data = $response->json();
+
+            if ($data['status'] == 'success') {
+                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data']]);
+            } else {
+                return view('index');
+            }
+        } catch (Exception $e) {
+            return view('index')->with('error', 'Terjadi kesalahan saat mengakses server. Silakan coba lagi nanti.');
+        }
     }
     
 }

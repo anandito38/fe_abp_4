@@ -43,7 +43,7 @@ Route::controller(AuthController::class)->group(function(){
 });
 Route::controller(MenuController::class)->group(function(){
     Route::get('/menu/all', 'getAllMenu');
-    // Route::get('/index', 'AuthDashboard');
+    Route::get('/menu/byshop', 'getMenuById');
 });
 
 Route::group([], function(){
@@ -59,8 +59,9 @@ Route::group([], function(){
     Route::get('/panel', function () {
         return view('panel');
     });
-
-
+    Route::get('/menuid', function () {
+        return view('menus');
+    });
 });
 
 Route::any('{any}', function () {

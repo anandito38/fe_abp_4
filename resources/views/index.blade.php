@@ -6,13 +6,14 @@
     <header class="header_section">
       <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container">
-              <a class="navbar-brand" href="/">
-                  <span>
-                      Delfood
-                  </span>
+              <a class="navbar-brand" href="#">
+                {{-- <img class="img-nav" src="{{ asset('images/logo.png') }}" alt="logo" height="70"> --}}
+                <span style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif; letter-spacing: 2px;">
+                  Telyu Canteen
+              </span>
               </a>
               <div class="" id="">
-                  <div class="User_option">
+                  {{-- <div class="User_option" style="margin">
                       @if (isset($cekLogin))
                       <a href="/logoutt">
                           <i class="fa fa-user" aria-hidden="true"></i>
@@ -24,7 +25,30 @@
                           <span>Login</span>
                       </a>
                       @endif
-                  </div>
+                  </div> --}}
+                  <div class="User_option" style="margin">
+                    @if (isset($cekLogin))
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span>{{$userAuth['nickname']}}</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/logoutt">Logout</a>
+                            @if (isset($userAuth['role']) && $userAuth['role'] == 'Administrator')
+                                <a class="dropdown-item" href="/panel">Panel</a>
+                            @else 
+                                <a class="dropdown-item" href="/Myshop">Myshop</a>
+                            @endif
+                        </div>
+                    </div>
+                    @else
+                    <a href="/login">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span>Login</span>
+                    </a>
+                    @endif
+                </div>
                   <div class="custom_menu-btn">
                       <button onclick="openNav()">
                           <img src="{{ asset('images/menu.png') }}" alt="">
@@ -34,7 +58,7 @@
                       <div class="overlay-content">
                           <a href="/">Home</a>
                           <a href="/menu/all">Menu</a>
-                          <a href="/shop">Toko</a>
+                          <a href="/shop/all">Toko</a>
                           <a href="/">Testimonial</a>
                       </div>
                   </div>
@@ -52,7 +76,7 @@
           <div class="col-lg-10 mx-auto">
             <div class="detail-box">
               <h1>
-                KANTIN TULT
+                Telyu Canteen
               </h1>
               <p>
                 Makan enak, murah, dan sehat

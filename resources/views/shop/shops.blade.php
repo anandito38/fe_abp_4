@@ -43,16 +43,19 @@
                 @csrf
                 @method('get')
                 <div class="img-box">
-                    <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                    <button type="submit" class="shop-link">
-                      <img src="images/r1.jpg" class="box-img" alt="">
-                    </button>
+                    <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
+                    <img src="{{ asset('images/toko.png')}}" class="box-img" alt="">
+                    <div class="detail-box">
+                      <button type="submit" class="shop-link">
+                        Go!
+                      </button>
+                    </div>
                 </div>
               </form>
               <div class="detail-box">
                 <h4>
-                  {{ $shop->nomorToko }}.
-                  {{ $shop->namaToko }}
+                  {{ $shop['nomorToko'] }}.
+                  {{ $shop['namaToko'] }}
                 </h4>
               </div>
             </div>

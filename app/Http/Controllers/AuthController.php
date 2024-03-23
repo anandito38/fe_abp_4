@@ -6,9 +6,52 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Exception;
 use App\Utils\GetUserInfo;
+use Illuminate\Support\Facades\View;
+
 
 class AuthController extends Controller
 {
+
+
+    public function register(Request $request){
+        try{
+            $headers = [
+                'Accept' => 'application/json'
+            ];
+            $fullName = $request->fullName;
+            $nickname = $request->nickname;
+            $phoneNumber = $request->phoneNumber;
+            $address = $request->address;
+            $role = $request->role;
+            $password = $request->password;
+
+            $api_request = [
+                'fullName' => $fullName,
+                'nickname' => $nickname,
+                'phoneNumber' => $phoneNumber,
+                'address' => $address,
+                'role' => $role,
+                'password' => $password
+            ];
+
+            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/register', $api_request);
+            $data = $response->json();
+            // dd($data);
+            if ($data['status'] == 'success') {
+                toastr()->success('This account register succesfully please login', 'Authentication');
+                return redirect('/login');
+            } else {
+                toastr()->error('Register failed!', 'Authentication');
+                return View::make('log.register');
+            }
+
+            
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
     public function login(Request $request){
         try{
             $headers = [
@@ -25,21 +68,20 @@ class AuthController extends Controller
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
             $data = $response->json();
-
             if ($data['status'] == 'success' && isset($data['data']['data']) && isset($data['data']['data']['role'])) {
                 if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller') {
                     setcookie('token', $data['data']['data']['token'], time() + 3600, '/', '', false, true);
-                    notify()->success('Login successfully!', 'Authentication');
-                    return redirect('/panel');
+                    toastr()->success('Login successfully!', 'Authentication');
+                    return redirect('/index');
                 } else {
-                    notify()->error('Login failed!', 'Authentication');
+                    toastr()->error('Login failed!', 'Authentication');
                     return view('log.login');
                 }
             }else if($data['status'] == 'success' && $data['data']['message'] == 'This account already logged in'){
-                notify()->info('This account already logged in', 'Authentication');
+                toastr()->info('This account already logged in', 'Authentication');
                 return view('log.login');
             } else {
-                notify()->error('Invalid credentials', 'Authentication');
+                toastr()->error('Invalid credentials', 'Authentication');
                 return view('log.login');
             }
 
@@ -63,7 +105,7 @@ class AuthController extends Controller
 
             if ($data['status'] == 'success') {
                 setcookie('token', '', time() - 3600, '/', '', false, true);
-                notify()->error('Logout successfully!', 'Authentication');
+                toastr()->info('Logout successfully!', 'Authentication');
                 return redirect('/index');
             } else {
                 return view('panel', ['data' => $data['message']]);

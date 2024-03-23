@@ -23,7 +23,7 @@ class MenuController extends Controller
                 $data = $response->json();
                 // dd($data);
                 if ($data['status'] == 'success') {
-                    return view('menusAll',['menus'=>$data['data']]);
+                    return view('menu.menusAll',['menus'=>$data['data']]);
                 } else {
                     return view('errors.404');
                 }
@@ -50,9 +50,9 @@ class MenuController extends Controller
 
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byshop', $api_request);
             $data = $response->json();
-            dd($data);
+            // dd($data);
             if ($data['status'] == 'success') {
-                return view('menus',['menus'=>$data['data']]);
+                return view('menu.menus',['menus'=>$data['data']]);
             } else {
                 return view('errors.404');
             }

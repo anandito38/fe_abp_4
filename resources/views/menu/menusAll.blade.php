@@ -15,7 +15,7 @@
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
         <h2>
-          Menu Kantin
+          Menu Kantin 
         </h2>
       </div>
       <div class="row">
@@ -24,7 +24,7 @@
           <div class="box">
             <a  href="/shop/{{ $menu['shop_id'] }}">
             <div class="img-box">
-              <img src="{{ asset('images/about-img.jpg')}}" class="box-img" alt="">
+              <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="">
             </div>
             </a>
             <div class="detail-box">

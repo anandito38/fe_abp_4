@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Tel-U Cafetaria</title>
+    <title>Admin Panel | Telyu Canteen</title>
     @notifyCss
     <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -34,11 +34,11 @@
         @if (url('/404') != url()->current()) --}}
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/panel">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Tel-U Cafetaria</div>
+                <div class="sidebar-brand-text mx-3">Telyu Canteen</div>
             </a>
 
             <hr class="sidebar-divider my-0">
@@ -152,6 +152,9 @@
                         @elseif (url('/payment') == url()->current())
                         <h5>PAYMENT SHEET INFORMATION</h5>
                         @endif --}}
+                        <div>
+                            <h1 class="h3 text-gray-800 bold-text">Admin Panel</h1>
+                        </div>
                     </div>
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -198,13 +201,15 @@
 
                 </nav>
 
-                @yield('content')
+                
 
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto black-text bold">
-                            {{-- <span>Copyright &copy; KANTIN TULT 2024</span> --}}
-                            <span>TEL-U CANTEEN</span>
+                            <span>Copyright &copy; Telyu Canteen 2024</span>
+                            {{-- <span>TEL-U CANTEEN</span> --}}
+
+                            <h1>Selamat Datang di Telyu Canteen</h1>
                         </div>
                     </div>
                 </footer>

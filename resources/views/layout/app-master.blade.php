@@ -36,14 +36,14 @@
   <link href="{{ asset('cssNew/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{ asset('cssNew/responsive.css')}}" rel="stylesheet" />
+  
 
 </head>
 <body>
-
-    <div>
+  <div>
         @yield('content')
     </div>
-    <!-- jQery -->
+  <!-- jQery -->
   <script src="{{ asset('jsNew/jquery-3.4.1.min.js')}}"></script>
   <!-- bootstrap js -->
   <script src="{{ asset('jsNew/bootstrap.js')}}"></script>

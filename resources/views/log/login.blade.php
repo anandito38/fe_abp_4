@@ -4,7 +4,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login Form Design | CodeLab</title>
+   <title>Login Form | Telyu Canteen</title>
    <link rel="stylesheet" href="cssNew/style_register.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 </head>
@@ -19,7 +19,7 @@
             @method('post')
             <div class="field">
                <input type="text" name="nickname" id="nickname" required>
-               <label for="nickname">Nama</label>
+               <label for="nickname">Nickname</label>
             </div>
             <div class="field">
                <input type="password" name="password" id="password" required>
@@ -32,7 +32,7 @@
                <input type="submit" value="Login">
             </div>
             <div class="signup-link">
-               Not a member? <a href="/register">Signup now</a>
+               Not a member? <a href="/register">Register now</a>
             </div>
       </form>
    </div>

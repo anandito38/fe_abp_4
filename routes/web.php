@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use App\Http\Controllers\MenuController;
 // });
 Route::group(['namespace' => 'App\Http\Controllers'], function()
 {  
-    Route::get('/shop', 'controller_test@getAllShops');
+    // Route::get('/shop', 'controller_test@getAllShops');
     Route::get('/isi/{id}', 'controller_test@isiShops');
     // Route::get('/menu', 'controller_test@getAllMenu');
     // Route::get('/menu/{id}', 'controller_test@getAllMenu');
@@ -40,10 +41,15 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/panel', 'getUserInfo');
     Route::get('/logoutt', 'logout');
     Route::get('/index', 'AuthDashboard');
+    Route::post('/register', 'register');
+    
 });
 Route::controller(MenuController::class)->group(function(){
     Route::get('/menu/all', 'getAllMenu');
     Route::get('/menu/byshop', 'getMenuById');
+});
+Route::controller(ShopController::class)->group(function(){
+    Route::get('/shop/all', 'getAllShop');
 });
 
 Route::group([], function(){
@@ -57,10 +63,11 @@ Route::group([], function(){
     });
 
     Route::get('/panel', function () {
-        return view('panel');
+        return view('admin.panel');
     });
-    Route::get('/menuid', function () {
-        return view('menus');
+
+    Route::get('/register', function () {
+        return view('log.register');
     });
 });
 

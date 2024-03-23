@@ -175,8 +175,8 @@ a:focus {
 .custom_menu-btn {
   z-index: 9;
   position: absolute;
-  right: 0;
-  top: 14px;
+  right: 2px;
+  top: 1.5rem;
 }
 
 .custom_menu-btn button {
@@ -197,9 +197,35 @@ a:focus {
 
 .menu_btn-style {
   position: fixed;
-  right: 15px;
-  top: 29px;
+  right: 17px;
+  top: 2.45rem;
 }
+
+.dropdown-menu {
+  text-align: center; /* Center align the dropdown menu */
+  min-width: 4rem;
+  width: 7rem;
+  margin-left: 1.5rem;
+}
+
+.dropdown-item {
+  color: #03002a !important; /* Initial color (grey) */
+  padding: 4px 4px; /* Adjust padding */
+  font-size: 14px; /* Adjust font size */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Make it a block element */
+  cursor: pointer; /* Change cursor to pointer */
+  width: 20%; /* Stretch the item to the width of the menu */
+}
+
+
+.dropdown-item:hover {
+  color: #ff0000 !important; /* Change text color on hover (white) */
+}
+
+
+
+
 
 .overlay {
   height: 100%;
@@ -473,6 +499,17 @@ a:focus {
 .recipe_section .box .detail-box h4 {
   font-family: "bodoni svtytwo sc itc tt book", sans-serif;
   font-weight: 400;
+}
+.recipe_section .box .detail-box .shop-link {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  background-color: #861c1e;
+  border-radius: 100%;
+  font-size: 12px;
+  color: #ffffff;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
 }
 
 .recipe_section .box .detail-box a {

@@ -4,26 +4,36 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Login Form Design | CodeLab</title>
+   <title>Register Form | Telyu Canteen</title>
    <link rel="stylesheet" href="cssNew/style_register.css">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
 </head>
 
 <body>
+   
    <div class="wrapper">
       <div class="title">
-            Login Form
+            Register Form
       </div>
-      <form id="loginForm" action="/login" method="POST">
+      <form id="RegiserForm" action="/register" method="POST">
             @csrf
             @method('post')
             <div class="field">
-               <input type="text" name="nickname" id="nickname" required>
-               <label for="nickname">Nama</label>
+               <input type="text" name="fullName" id="fullName" required>
+               <label for="fullName">Nama Lengkap</label>
             </div>
             <div class="field">
-               <input type="email" name="email" id="email" required>
-               <label for="email">email</label>
+               <input type="text" name="nickname" id="nickname" required>
+               <label for="nickname">Nickname</label>
+            </div>
+            <div class="field">
+               <input type="text" name="phoneNumber" id="phoneNumber" required>
+               <label for="phoneNumber">No Handphone</label>
+            </div>
+            <div class="field">
+               <input type="text" name="address" id="address" required>
+               <label for="address">Alamat</label>
             </div>
             <div class="field">
                <input type="password" name="password" id="password" required>
@@ -32,13 +42,16 @@
                </div>
                <label for="password">Password</label>
             </div>
+
+            <input type="hidden" name="role" value="Seller">
             
             <div class="field">
                <input type="submit" value="Login">
             </div>
             <div class="signup-link">
-               Not a member? <a href="/register">Signup now</a>
+               Already have account? <a href="/login">Login now</a>
             </div>
+      </form>
       </form>
    </div>
    <script>
@@ -53,8 +66,7 @@
          this.classList.toggle("bi-eye-slash");
       });
    </script>
-
-
+   
 </body>
 
 </html>

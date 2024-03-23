@@ -1,0 +1,41 @@
+.black-text {
+    color: black;
+}
+
+.red-text {
+    color: red;
+}
+
+.bold-text {
+    font-weight: 900;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.wrapper {
+    background-image: url(../img/bg_admin_telu.jpg);
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.text-base{
+    color: #d69922;
+}
+
+.disabled-btn-gray {
+    pointer-events: none;
+    background-color: #ccc;
+    color: #999;
+}
+
+.disabled-btn {
+    pointer-events: none;
+}

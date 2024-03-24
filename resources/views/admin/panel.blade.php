@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+`   
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,12 +22,13 @@
     <link href="{{ asset('css/support-index.css') }}" rel="stylesheet">
 
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
 
 </head>
 
-<body id="page-top">
+<body id="page-top" style="margin: 0%; padding: 0%;">
     <x-notify::notify />
-    <div id="wrapper">
+    <div id="wrapper" style="margin: 0%; padding: 0%;">
         {{-- @php
         $data1 = $userInfo;
         @endphp
@@ -60,7 +61,7 @@
                 <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="">
+                        <a class="collapse-item" href="/user/all">
                             <i class="fa-solid fa-user-gear" style="margin-right: 5px;"></i>ALL USER SHEET
                         </a>
                     </div>
@@ -153,12 +154,12 @@
                         <h5>PAYMENT SHEET INFORMATION</h5>
                         @endif --}}
                         <div>
-                            <h1 class="h3 text-gray-800 bold-text">Admin Panel</h1>
+                            <h1 class="h3 text-gray-800 bold-text" style="margin-left: 1rem">Admin Panel</h1>
                         </div>
                     </div>
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    {{-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
-                    </button>
+                    </button> --}}
 
                     <ul class="navbar-nav ml-auto">
                         {{-- @if(Session::has('userInfo')) --}}
@@ -201,6 +202,72 @@
 
                 </nav>
 
+                <div>
+                    @isset($users)
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">fullName</th>
+                                <th scope="col">nickname</th>
+                                <th scope="col">phoneNumber</th>
+                                <th scope="col">address</th>
+                                <th scope="col">role</th>
+                                <th scope="col">status</th>
+                                <th scope="col">action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($users as $user)
+                            <tr>
+                                
+                                <th scope="row">{{ $user['id'] }}</th>
+                                <td>{{ $user['fullName'] }}</td>
+                                <td>{{ $user['nickname'] }}</td>
+                                <td>{{ $user['phoneNumber'] }}</td>
+                                <td>{{ $user['address'] }}</td>
+                                <td>{{ $user['role'] }}</td>
+                                @if($user['token']==null)
+                                    <td><span class="logged-in" style="color:red"> ● </span>offline</td>
+                                @else
+                                    <td><span class="logged-in" style="color:green"> ● </span>online</td>
+                                @endif
+                                <td>
+                                    <button href="/user/edit" style="color:rgb(183, 183, 9)" >
+                                        <i class="fas fa-edit"></i>
+                                        <form id="EditUser" action="/user/edit" method="PUT">
+                                            @csrf
+                                            @method('put')
+                                            <input type="hidden" name="id" value="{{ $user['id'] }}">
+                                            <input type="hidden" name="nickname" value="{{ $user['nickname'] }}">
+                                            <input type="hidden" name="password" value="{{ $user['password'] }}">
+                                            <input type="hidden" name="fullName" value="{{ $user['fullName'] }}">
+                                            <input type="hidden" name="phoneNumber" value="{{ $user['phoneNumber'] }}">
+                                            <input type="hidden" name="role" value="{{ $user['role'] }}">
+                                            <input type="hidden" name="address" value="{{ $user['address'] }}">
+                                        </form>
+                                    </button>
+                                    <button href="/user/delete" style="color:red" >
+                                        <i class="fas fa-trash"></i>
+                                        <form id="DelUser" action="/user/delete" method="DELETE">
+                                            @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="id" value="{{ $user['id'] }}">
+                                        </form>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <!-- Konten yang akan ditampilkan jika data pengguna tidak ada -->
+                        {{-- <p>Data pengguna tidak ditemukan atau tidak tersedia.</p> --}}
+                        <center>
+                            <h1>Selamat Datang di Telyu Canteen</h1>
+                        </center>
+                    @endisset
+                </div>
                 
 
                 <footer class="sticky-footer bg-white">
@@ -208,8 +275,6 @@
                         <div class="copyright text-center my-auto black-text bold">
                             <span>Copyright &copy; Telyu Canteen 2024</span>
                             {{-- <span>TEL-U CANTEEN</span> --}}
-
-                            <h1>Selamat Datang di Telyu Canteen</h1>
                         </div>
                     </div>
                 </footer>
@@ -256,6 +321,7 @@
         <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> --}}
 
 </body>
 

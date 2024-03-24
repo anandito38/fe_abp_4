@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="/">
-                {{-- <img src="{{ asset('images/logo.png') }}" alt="logo" height="70"> --}}
+                <img src="{{ asset('images/logo.png') }}" alt="logo" height="70">
                 <span style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif; letter-spacing: 2px;">
                     Telyu Canteen
                 </span>

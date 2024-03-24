@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ShopController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +44,13 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/register', 'register');
     
 });
+
+Route::controller(UserController::class)->group(function(){
+    Route::get('/user/all', 'getAllUser');
+    Route::put('/user/edit', 'editUser');
+    Route::delete('/user/delete', 'deleteUser');
+});
+
 Route::controller(MenuController::class)->group(function(){
     Route::get('/menu/all', 'getAllMenu');
     Route::get('/menu/byshop', 'getMenuById');

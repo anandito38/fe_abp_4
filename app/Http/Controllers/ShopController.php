@@ -12,11 +12,11 @@ class ShopController extends Controller
     public function getAllShop()
     {
         try{
-            $token = $_COOKIE['token'];
+            // $token = $_COOKIE['token'];
 
                 $headers = [
                     'Accept' => 'application\json',
-                    'Authorization' => 'Bearer '.$token
+                    // 'Authorization' => 'Bearer '.$token
                 ];
 
                 $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/shop/all');

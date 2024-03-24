@@ -35,10 +35,10 @@ class MenuController extends Controller
     public function getMenuById(Request $request){
         try{
             
-            $token = $_COOKIE['token'];
+            // $token = $_COOKIE['token'];
             $headers = [
                 'Accept' => 'application\json',
-                'Authorization' => 'Bearer '.$token
+                // 'Authorization' => 'Bearer '.$token
             ];
             // dd($headers);
 
@@ -48,7 +48,7 @@ class MenuController extends Controller
                 'shop_id' => $shop_id,
             ];
 
-            $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byshop', $api_request);
+            $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byShop', $api_request);
             $data = $response->json();
             // dd($data);
             if ($data['status'] == 'success') {
@@ -61,6 +61,6 @@ class MenuController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
-
+    
 
 }

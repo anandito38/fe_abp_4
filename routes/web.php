@@ -53,7 +53,7 @@ Route::controller(UserController::class)->group(function(){
 
 Route::controller(MenuController::class)->group(function(){
     Route::get('/menu/all', 'getAllMenu');
-    Route::get('/menu/byshop', 'getMenuById');
+    Route::post('/menu/byShop', 'getMenuById');
 });
 Route::controller(ShopController::class)->group(function(){
     Route::get('/shop/all', 'getAllShop');

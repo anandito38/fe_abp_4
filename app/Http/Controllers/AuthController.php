@@ -124,7 +124,23 @@ class AuthController extends Controller
 
     public function AuthDashboard(){
         if (!isset($_COOKIE['token'])) {
-            return view('index');
+            $headers2 = [
+                'Accept' => 'application/json',
+            ];
+            try {
+    
+    
+                $response2 = Http::withHeaders($headers2)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all');
+                $data2 = $response2->json();
+    
+                if ($data2['status'] == 'success') {
+                    return view('index', ['menus'=>$data2['data']]);
+                } else {
+                    return view('index');
+                }
+            } catch (Exception $e) {
+                return view('index')->with('error', 'Terjadi kesalahan saat mengakses server. Silakan coba lagi nanti.');
+            }
         }
 
         $token = $_COOKIE['token'];
@@ -133,15 +149,22 @@ class AuthController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
+        $headers2 = [
+            'Accept' => 'application/json',
+        ];
 
         try {
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/token/test');
             $user = $user = GetUserInfo::getUserInfo();
 
+
+            $response2 = Http::withHeaders($headers2)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all');
+
             $data = $response->json();
+            $data2 = $response2->json();
 
             if ($data['status'] == 'success') {
-                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data']]);
+                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data']], ['menus'=>$data2['data']]);
             } else {
                 return view('index');
             }

@@ -78,25 +78,20 @@
               <h1>
                 Telyu Canteen
               </h1>
-              <p>
+              <h3>
                 Makan enak, murah, dan sehat
-              </p>
+              </h3>
             </div>
-            <div class="find_container ">
+            {{-- <div class="find_container ">
               <div class="container">
                 <div class="row">
                   <div class="col">
                     <form>
                       <div class="form-row ">
                         <div class="form-group col-lg-5">
-                          <input type="text" class="form-control" id="inputHotel" placeholder="Restaurant Name">
+                          <input type="text" class="form-control" id="inputHotel" placeholder="Cari menu">
                         </div>
-                        <div class="form-group col-lg-3">
-                          <input type="text" class="form-control" id="inputLocation" placeholder="All Locations">
-                          <span class="location_icon">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                          </span>
-                        </div>
+                        
                         <div class="form-group col-lg-3">
                           <div class="btn-box">
                             <button type="submit" class="btn ">Search</button>
@@ -107,7 +102,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
@@ -160,7 +155,7 @@
 
   <!-- recipe section -->
 
-  <section class="recipe_section layout_padding-top">
+  {{-- <section class="recipe_section layout_padding-top">
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
@@ -220,12 +215,76 @@
         </a>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <!-- end recipe section -->
+  <section class="recipe_section layout_padding-top">
+    <div class="container" style="margin-bottom: 70px">
+      <div class="heading_container heading_center">
+        <h2>
+          Menu Kantin 
+        </h2>
+      </div>
+      <div>
+        <div class="container">
+          <br/>
+          <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-6">
+              <form class="card card-sm">
+                <div class="card-body row no-gutters align-items-center">
+                  {{-- <div class="col-auto">
+                    <i class="fas fa-search h4 text-body"></i>
+                  </div> --}}
+                  <!--end of col-->
+                  <div class="col">
+                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Nama Menu atau Toko" style="text-align: center;" oninput="searchMenu(this.value)">
+                  </div>
+                  <!--end of col-->
+                  {{-- <div class="col-auto">
+                    <button class="btn btn-lg btn-success" type="submit">Search</button>
+                  </div> --}}
+                  <!--end of col-->
+                </div>
+              </form>
+            </div>
+            <!--end of col-->
+          </div>
+        </div>
+      </div>
+      <div class="row" id="menuList">
+        @foreach ($menus as $menu)
+        <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
+          <div class="box">
+            <a href="/shop/{{ $menu['shop_id'] }}">
+              <div class="img-box">
+                <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="">
+              </div>
+            </a>
+            <div class="detail-box">
+              <h4>
+                {{ $menu['namaMenu'] }}.
+                <br>
+                {{ $menu['hargaMenu'] }}
+              </h4>
+              <h6>
+                {{ $menu['deskripsiMenu'] }} dari
+                {{ $menu['shop_namaToko'] }}
+              </h6>
+              <a href="/shop/{{ $menu['shop_id'] }}">Go</a>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+      <!-- Tambahkan elemen untuk menampilkan pesan "Menu tidak ditemukan" -->
+      <div id="noMenuFound" style="display: none; text-align: center;">
+        <h5>Menu atau Toko tidak ditemukan.</h5>
+      </div>
+    </div>
+  </section>
+
 
   <!-- app section -->
-
   <section class="app_section">
     <div class="container">
       <div class="col-md-9 mx-auto">
@@ -234,20 +293,20 @@
             <div class="detail-box">
               <h2>
                 <span> Get the</span> <br>
-                Delfood App
+                Telyu Canteen App
               </h2>
               <p>
-                long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The poin
+                Aplikasi Telyu Canteen memudahkan kamu untuk memesan makanan dan minuman di kantin TULT
               </p>
               <div class="app_btn_box">
-                <a href="" class="mr-1">
+                <a href="https://play.google.com" class="mr-1" target="_blank" >
                   <img src="images/google_play.png" class="box-img" alt="">
                 </a>
-                <a href="">
-                  <img src="images/app_store.png" class="box-img" alt="">
+                <a href="https://www.apple.com" target="_blank">
+                  <img src="images/app_store.png" class="box-img" alt="" >
                 </a>
               </div>
-              <a href="" class="download_btn">
+              <a href="https://play.google.com" class="download_btn" target="_blank">
                 Download Now
               </a>
             </div>
@@ -263,218 +322,48 @@
 
   </section>
 
-  <!-- end app section -->
-
-  <!-- about section -->
-
-  <section class="about_section layout_padding">
-    <div class="container">
-      <div class="col-md-11 col-lg-10 mx-auto">
-        <div class="heading_container heading_center">
-          <h2>
-            About Us
-          </h2>
-        </div>
-        <div class="box">
-          <div class="col-md-7 mx-auto">
-            <div class="img-box">
-              <img src="images/about-img.jpg" class="box-img" alt="">
-            </div>
-          </div>
-          <div class="detail-box">
-            <p>
-              Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
-            </p>
-            <a href="" >
-                <i class="fa fa-arrow-right" aria-hidden="true" ></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end about section -->
-
-  <!-- news section -->
-
-  <section class="news_section">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Latest News
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/n1.jpg" class="box-img" alt="">
-            </div>
-            <div class="detail-box">
-              <h4>
-                Tasty Food For you
-              </h4>
-              <p>
-                there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined
-              </p>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/n2.jpg" class="box-img" alt="">
-            </div>
-            <div class="detail-box">
-              <h4>
-                Breakfast For you
-              </h4>
-              <p>
-                there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined
-              </p>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end news section -->
-
-  <!-- client section -->
-
-  <section class="client_section layout_padding">
-    <div class="container">
-      <div class="col-md-11 col-lg-10 mx-auto">
-        <div class="heading_container heading_center">
-          <h2>
-            Testimonial
-          </h2>
-        </div>
-        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="detail-box">
-                <h4>
-                  Virginia
-                </h4>
-                <p>
-                  Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-                </p>
-                <i class="fa fa-quote-left" aria-hidden="true"></i>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="detail-box">
-                <h4>
-                  Virginia
-                </h4>
-                <p>
-                  Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-                </p>
-                <i class="fa fa-quote-left" aria-hidden="true"></i>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="detail-box">
-                <h4>
-                  Virginia
-                </h4>
-                <p>
-                  Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-                </p>
-                <i class="fa fa-quote-left" aria-hidden="true"></i>
-              </div>
-            </div>
-          </div>
-          <a class="carousel-control-prev d-none" href="#customCarousel1" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#customCarousel1" role="button" data-slide="next">
-            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- end client section -->
 
   <div class="footer_container">
-    <!-- info section -->
-    <section class="info_section ">
-      <div class="container">
-        <div class="contact_box">
-          <a href="">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-phone" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div class="info_links">
-          <ul>
-            <li class="active">
-              <a href="index.html">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="about.html">
-                About
-              </a>
-            </li>
-            <li>
-              <a class="" href="blog.html">
-                Blog
-              </a>
-            </li>
-            <li>
-              <a class="" href="testimonial.html">
-                Testimonial
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="social_box">
-          <a href="">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-          </a>
-          <a href="">
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-    <!-- end info_section -->
-
-
     <!-- footer section -->
-    <footer class="footer_section">
+    <footer class="footer_section ">
       <div class="container">
         <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br>
-          Distributed By: <a href="https://themewagon.com/">ThemeWagon</a>
+          &copy; <span id="displayYear"></span> Develop BY ABP Kelompok 4
         </p>
       </div>
     </footer>
     <!-- footer section -->
 
   </div>
+
+
+  <script>
+    function searchMenu(keyword) {
+      // Ambil semua elemen menu
+      var menus = document.querySelectorAll('#menuList .menu-item'); // Ubah pemilihan menjadi kelas menu-item
+      var noMenuFound = document.getElementById('noMenuFound'); // Ambil elemen untuk pesan "Menu tidak ditemukan"
+      var menuFound = false; // Inisialisasi variabel untuk menandai apakah menu ditemukan
+      
+      // Loop melalui setiap elemen menu
+      menus.forEach(function(menu) {
+        var namaMenu = menu.querySelector('h4').textContent.toLowerCase();
+        var deskripsiMenu = menu.querySelector('h6').textContent.toLowerCase();
+        
+        // Periksa apakah keyword cocok dengan nama menu atau deskripsi menu
+        if (namaMenu.includes(keyword.toLowerCase()) || deskripsiMenu.includes(keyword.toLowerCase())) {
+          menu.style.display = 'block'; // Tampilkan elemen menu jika cocok
+          menuFound = true; // Setel variabel menuFound menjadi true karena menu ditemukan
+        } else {
+          menu.style.display = 'none'; // Sembunyikan elemen menu jika tidak cocok
+        }
+      });
+
+      // Tampilkan pesan "Menu tidak ditemukan" jika tidak ada menu yang ditemukan
+      if (!menuFound) {
+        noMenuFound.style.display = 'block';
+      } else {
+        noMenuFound.style.display = 'none';
+      }
+    }
+  </script>
 @endsection

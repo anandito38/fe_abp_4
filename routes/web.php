@@ -19,14 +19,6 @@ use App\Http\Controllers\UserController;
 // Route::get('/', function () {
 //     return redirect('/login');
 // });
-Route::group(['namespace' => 'App\Http\Controllers'], function()
-{  
-    // Route::get('/shop', 'controller_test@getAllShops');
-    Route::get('/isi/{id}', 'controller_test@isiShops');
-    // Route::get('/menu', 'controller_test@getAllMenu');
-    // Route::get('/menu/{id}', 'controller_test@getAllMenu');
-
-});
 
 // Route::get('/menu', function () {
 //     return view('menus');
@@ -38,7 +30,7 @@ Route::get('/', function () {
 
 Route::controller(AuthController::class)->group(function(){
     Route::post('/login', 'login')->middleware('guest');
-    Route::post('/panel', 'getUserInfo');
+    // Route::get('/panel', 'getUserInfo');
     Route::get('/logoutt', 'logout');
     Route::get('/index', 'AuthDashboard');
     Route::post('/register', 'register');
@@ -70,11 +62,15 @@ Route::group([], function(){
     });
 
     Route::get('/panel', function () {
-        return view('admin.panel');
+        return view('admin.dashboard');
     });
 
     Route::get('/register', function () {
         return view('log.register');
+    });
+
+    Route::get('/cekk', function () {
+        return view('admin.dashboard');
     });
 });
 

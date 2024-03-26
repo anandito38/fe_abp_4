@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Exception;
 use App\Utils\GetUserInfo;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 
 
 class AuthController extends Controller
@@ -68,9 +69,21 @@ class AuthController extends Controller
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
             $data = $response->json();
+
             if ($data['status'] == 'success' && isset($data['data']['data']) && isset($data['data']['data']['role'])) {
                 if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller') {
                     setcookie('token', $data['data']['data']['token'], time() + 3600, '/', '', false, true);
+
+                    $token = $data['data']['data']['token'];
+                    $headers_auth = [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer '.$token
+                    ];
+
+                    $responseUserInfo = Http::withHeaders($headers_auth)->post($_ENV['BACKEND_API_ENDPOINT'].'/user/info');
+                    $getUserInfo = $responseUserInfo->json();
+                    
+                    Session::put('userInfo', $getUserInfo);
                     toastr()->success('Login successfully!', 'Authentication');
                     return redirect('/index');
                 } else {
@@ -105,6 +118,8 @@ class AuthController extends Controller
 
             if ($data['status'] == 'success') {
                 setcookie('token', '', time() - 3600, '/', '', false, true);
+                Session::forget('userInfo');
+                Session::flush();
                 toastr()->info('Logout successfully!', 'Authentication');
                 return redirect('/index');
             } else {
@@ -172,5 +187,4 @@ class AuthController extends Controller
             return view('index')->with('error', 'Terjadi kesalahan saat mengakses server. Silakan coba lagi nanti.');
         }
     }
-    
 }

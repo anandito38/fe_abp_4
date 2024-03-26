@@ -59,11 +59,11 @@
                 <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
-                        <a class="collapse-item" href="/admin">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-user-gear" style="margin-right: 5px;"></i>ADMIN SHEET
                         </a>
                         
-                        <a class="collapse-item" href="/customer">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-user-group" style="margin-right: 5px;"></i>CUSTOMER SHEET
                         </a>
 
@@ -80,13 +80,13 @@
                 </a>
                 <div id="collapseStock" class="collapse" aria-labelledby="headingStock" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/category">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-clipboard-list" style="margin-right: 5px;"></i>CATEGORY SHEET
                         </a>
-                        <a class="collapse-item" href="/vendors">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-box" style="margin-right: 5px;"></i>VENDOR SHEET
                         </a>
-                        <a class="collapse-item" href="/product">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-cookie-bite" style="margin-right: 5px;"></i>PRODUCT SHEET
                         </a>
                     </div>
@@ -102,15 +102,15 @@
                 </a>
                 <div id="collapseSales" class="collapse" aria-labelledby="headingSales" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/book">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-book-bookmark" style="margin-right: 5px;"></i>BOOKING SHEET
                         </a>
                         
-                        <a class="collapse-item" href="/payment">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-money-bill" style="margin-right: 5px;"></i>PAYMENT SHEET
                         </a>
                         
-                        <a class="collapse-item" href="/invoice">
+                        <a class="collapse-item" href="#">
                             <i class="fa-solid fa-receipt" style="margin-right: 5px;"></i>INVOICE SHEET
                         </a>
                     </div>
@@ -133,8 +133,9 @@
 
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <div class="float-left black-text">
-                        {{-- @if (url('/dashboard') == url()->current())
-                        <h5>DASHBOARD</h5>
+                        @if (url('/panel') == url()->current())
+                        <h5>PANEL DASHBOARD</h5>
+                        {{-- 
                         @elseif (url('/monitoring') == url()->current())
                         <h5>MONITORING</h5>
                         @elseif (url('/admin') == url()->current())
@@ -156,8 +157,8 @@
                         @elseif (url('/invoice') == url()->current())
                         <h5>INVOICE SHEET INFORMATION</h5>
                         @elseif (url('/payment') == url()->current())
-                        <h5>PAYMENT SHEET INFORMATION</h5>
-                        @endif --}}
+                        <h5>PAYMENT SHEET INFORMATION</h5> --}}
+                        @endif 
                     </div>
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>

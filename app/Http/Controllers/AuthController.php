@@ -19,6 +19,7 @@ class AuthController extends Controller
             $headers = [
                 'Accept' => 'application/json'
             ];
+            
             $fullName = $request->fullName;
             $nickname = $request->nickname;
             $phoneNumber = $request->phoneNumber;
@@ -69,9 +70,10 @@ class AuthController extends Controller
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
             $data = $response->json();
+            // dd($data);
 
             if ($data['status'] == 'success' && isset($data['data']['data']) && isset($data['data']['data']['role'])) {
-                if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller') {
+                if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller' || $data['data']['data']['role'] == 'Buyer') {
                     setcookie('token', $data['data']['data']['token'], time() + 3600, '/', '', false, true);
 
                     $token = $data['data']['data']['token'];

@@ -46,9 +46,11 @@ Route::controller(UserController::class)->group(function(){
 Route::controller(MenuController::class)->group(function(){
     Route::get('/menu/all', 'getAllMenu');
     Route::post('/menu/byShop', 'getMenuById');
+    Route::post('/menu/add', 'addMenu');
 });
 Route::controller(ShopController::class)->group(function(){
     Route::get('/shop/all', 'getAllShop');
+    Route::post('/shop/byUser', 'getShopByUserId');
 });
 
 Route::group([], function(){

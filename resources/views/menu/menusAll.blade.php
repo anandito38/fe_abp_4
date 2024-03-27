@@ -48,7 +48,8 @@
           <div class="box">
             <a href="/shop/{{ $menu['shop_id'] }}">
               <div class="img-box">
-                <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="">
+                <img src="" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
               </div>
             </a>
             <div class="detail-box">

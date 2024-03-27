@@ -46,6 +46,7 @@
       </div>
 
       <div class="row" id="shopList">
+
         @foreach ($shops as $shop)
           <div class="col-sm-6 col-md-4 mx-auto shop-item" data-name="{{ strtolower($shop['namaToko']) }}">
             <div class="box">
@@ -54,7 +55,8 @@
                 {{-- @method('get') --}}
                 <div class="img-box">
                     <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
-                    <img src="{{ asset('images/toko.png')}}" class="box-img" alt="">
+                    <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">>
+                    {{-- <img src="{{ asset('images/toko.png')}}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">> --}}
                     <div class="detail-box">
                       <button type="submit" class="shop-link">
                         Go!

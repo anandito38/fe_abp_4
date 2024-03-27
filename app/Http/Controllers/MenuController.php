@@ -61,6 +61,43 @@ class MenuController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
+
+    public function addMenu(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application\json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            // dd($headers);
+
+            $namaMenu = $request->namaMenu;
+            $hargaMenu = $request->hargaMenu;
+            $stokMenu = 0;
+            $deskripsiMenu = $request->deskripsiMenu;
+
+            $api_request = [
+                'namaMenu' => $namaMenu,
+                'hargaMenu' => $hargaMenu,
+                'stokMenu' => $stokMenu,
+                'deskripsiMenu' => $deskripsiMenu
+            ];
+
+            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/menu/add', $api_request);
+            $data = $response->json();
+            // dd($data);
+            if ($data['status'] == 'success') {
+                toastr()->success('Menu added succesfully', 'Menu');
+                return redirect('/index');
+            } else {
+                return view('errors.404');
+            }
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
     
 
 }

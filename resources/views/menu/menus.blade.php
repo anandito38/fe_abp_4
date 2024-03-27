@@ -15,7 +15,7 @@
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
         <h2>Menu
-          @if (isset($menus))
+          @if (isset($menus ))
             {{ $menus[0]['namaToko'] }}
           @endif
         </h2>
@@ -26,7 +26,8 @@
           <div class="box">
             <a  data-toggle="modal" data-target="#modalTambahMenu">
               <div class="img-box">
-                <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="">
+                <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
               </div>
             </a>
             <div class="detail-box">

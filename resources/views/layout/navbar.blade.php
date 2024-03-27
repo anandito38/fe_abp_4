@@ -28,7 +28,6 @@
                         <a href="/">Home</a>
                         <a href="/menu/all">Menu</a>
                         <a href="/shop/all">Toko</a>
-                        <a href="/">Testimonial</a>
                     </div>
                 </div>
             </div>

@@ -13,19 +13,6 @@
               </span>
               </a>
               <div class="" id="">
-                  {{-- <div class="User_option" style="margin">
-                      @if (isset($cekLogin))
-                      <a href="/logoutt">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                          <span>{{$userAuth['nickname']}}</span>
-                      </a>
-                      @else
-                      <a href="/login">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                          <span>Login</span>
-                      </a>
-                      @endif
-                  </div> --}}
                   <div class="User_option" style="margin">
                     @if (isset($cekLogin))
                     <div class="dropdown">
@@ -38,7 +25,25 @@
                             @if (isset($userAuth['role']) && $userAuth['role'] == 'Administrator')
                                 <a class="dropdown-item" href="/panel">Panel</a>
                             @else 
-                                <a class="dropdown-item" href="/Myshop">Myshop</a>
+                              @if (isset($userAuth['role']) && $userAuth['role'] == 'Seller') 
+                                {{-- <a class="dropdown-item" href="/Myshop">Myshop</a> --}}
+                                
+                                <form action="/shop/byUser" method="POST">
+                                  @csrf
+                                  @if(Session::has('userInfo'))
+                                  @php
+                                      $data = Session::get('userInfo');
+                                  @endphp
+                                      <input type="hidden" name="user_id" value="3">
+                                      {{-- <input type="hidden" name="user_id" value="{{ $data['data']['id'] }}"> --}}
+                                      <button class="dropdown-item" type="submit" style="margin-left:25px" >
+                                            Myshop
+                                      </button>
+                                  @endif
+                                      
+                                  
+                                </form>
+                              @endif
                             @endif
                         </div>
                     </div>
@@ -59,7 +64,10 @@
                           <a href="/">Home</a>
                           <a href="/menu/all">Menu</a>
                           <a href="/shop/all">Toko</a>
-                          <a href="/">Testimonial</a>
+                          @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer') 
+                            {{-- <a class="dropdown-item" href="/Myshop">Myshop</a> --}}
+                            <a href="/Cart">Keranjang</a>
+                          @endif
                       </div>
                   </div>
               </div>
@@ -109,7 +117,7 @@
       <div class="slider_container">
         <div class="item">
           <div class="img-box">
-            <img src="images/slider-img1.png" alt="" />
+            <img src="images/slider-img1.png" alt="images/slider-img1.png" />
           </div>
         </div>
         <div class="item">
@@ -153,71 +161,6 @@
   </div>
 
 
-  <!-- recipe section -->
-
-  {{-- <section class="recipe_section layout_padding-top">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Our Best Popular Recipes
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 col-md-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/r1.jpg" class="box-img" alt="">
-            </div>
-            <div class="detail-box">
-              <h4>
-                Breakfast
-              </h4>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true" ></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/r2.jpg" class="box-img" alt="">
-            </div>
-            <div class="detail-box">
-              <h4>
-                Lunch
-              </h4>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/r3.jpg" class="box-img" alt="">
-            </div>
-            <div class="detail-box">
-              <h4>
-                Dinner
-              </h4>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="btn-box">
-        <a href="">
-          Order Now
-        </a>
-      </div>
-    </div>
-  </section> --}}
-
-  <!-- end recipe section -->
   <section class="recipe_section layout_padding-top">
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
@@ -257,7 +200,8 @@
           <div class="box">
             <a href="/shop/{{ $menu['shop_id'] }}">
               <div class="img-box">
-                <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="">
+                <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
               </div>
             </a>
             <div class="detail-box">

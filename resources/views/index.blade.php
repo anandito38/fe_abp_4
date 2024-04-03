@@ -34,7 +34,7 @@
                                   @php
                                       $data = Session::get('userInfo');
                                   @endphp
-                                      <input type="hidden" name="user_id" value="3">
+                                      <input type="hidden" name="user_id" value="1">
                                       {{-- <input type="hidden" name="user_id" value="{{ $data['data']['id'] }}"> --}}
                                       <button class="dropdown-item" type="submit" style="margin-left:25px" >
                                             Myshop

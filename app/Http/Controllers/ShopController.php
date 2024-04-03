@@ -34,6 +34,42 @@ class ShopController extends Controller
 
     }
 
+    public function getShopMenuByUserId(Request $request){
+        try{
+            $headers = [
+                'Accept' => 'application\json',
+            ];
+            // dd($headers);
+
+            $shop_id = $request->shop_id;
+
+            $api_request = [
+                'shop_id' => $shop_id,
+            ];
+
+            $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byShop', $api_request);
+            $data = $response->json();
+            // dd($data);
+
+
+
+            if (isset($data)) {
+                if ($data['status'] == 'success') {
+                    return view('shop.myShopMenu', ['menus'=>$data['data']], ['shop_id' => $shop_id]);
+                }else{
+                    return view('shop.myShopMenu', ['shop_id' => $shop_id]);
+                }
+                // return view('shop.myShop',['shop'=>$data['data']], ['menus'=>$data2['data']]);
+            } else {
+                return view('errors.404');
+            }
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
+
     public function getShopByUserId(Request $request){
         try{
             
@@ -54,24 +90,9 @@ class ShopController extends Controller
             $data = $response->json();
             // dd($data);
 
-            $shop_id = $data['data'][0]['id'];
-            $headers2 = [
-                'Accept' => 'application\json',
-            ];
-            $api_request2 = [
-                'shop_id' => $shop_id,
-            ];
-            $response = Http::withHeaders($headers2)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byShop', $api_request2);
-            $data2 = $response->json();
-            dd($data2);
 
             if ($data['status'] == 'success') {
-                if ($data2['message'] == 'Menu not found'){
-                    return view('shop.myShop',['shop'=>$data['data']]);
-                }else{
-                    return view('shop.myShop',['shop'=>$data['data']], ['menus'=>$data2['data']]);
-                }
-                // return view('shop.myShop',['shop'=>$data['data']], ['menus'=>$data2['data']]);
+                    return view('shop.myShop',['shops'=>$data['data']]);
             } else {
                 return view('errors.404');
             }

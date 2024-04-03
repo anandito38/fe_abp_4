@@ -12,54 +12,44 @@
   <section class="recipe_section layout_padding-top">
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
-        <h2>
-          List Toko
+        <h2>Menu Toko
+    
+            {{ $shop_id }}
+
         </h2>
       </div>
       <div class="row">
-          
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <a data-toggle="modal" data-target="#modalTambahMenu">
               <div class="img-box">
-                <img src="" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example (copy)';">
+                <img src="" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example (copy 1)';">
                 {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
               </div>
             </a>
           </div>
         </div>
-          
 
 
-        {{-- @php
-          dd($shops)
-        @endphp         --}}
-        @if (isset($shops))
-          @foreach ($shops as $shop)
+        
+        @if (isset($menus))
+          @foreach ($menus as $menu)
           <div class="col-sm-6 col-md-4 mx-auto">
             <div class="box">
-              <form action="/shop/byUser/menu" method="POST">
-                @csrf
-                {{-- @method('get') --}}
+              <a >
                 <div class="img-box">
-                    <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
-                    <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                    {{-- <img src="{{ asset('images/toko.png')}}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">> --}}
-                    <div class="detail-box">
-                      <button type="submit" class="shop-link">
-                        Go!
-                      </button>
-                    </div>
+                  <img src="" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                  {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
                 </div>
-              </form>
+              </a>
               <div class="detail-box">
                 <h4>
-                  {{ $shop['namaToko'] }}.
+                  {{ $menu['namaMenu'] }}.
                   <br>
-                  {{ $shop['nomorToko'] }}
+                  {{ $menu['hargaMenu'] }}
                 </h4>
                 <h6>
-                  {{ $shop['lokasiToko'] }}</h6>
+                  {{ $menu['deskripsiMenu'] }}</h6>
               </div>
             </div>
           </div>
@@ -87,7 +77,7 @@
         <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p>
         <form>
           <input type="number" class="form-control" placeholder="Jumlah" name="jumlahMenu">
-          <input type="hidden" name="user_id" value="">
+          <input type="hidden" name="menu_id" value="{{ $shop_id }}">
         </form>
 
 

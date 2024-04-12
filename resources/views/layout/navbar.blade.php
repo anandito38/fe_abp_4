@@ -10,13 +10,13 @@
             </a>
             <div class="" id="">
                 <div class="User_option">
-                    <form class="form-inline ">
+                    {{-- <form class="form-inline ">
                         
                         <input type="search" placeholder="Search">
                         <button class="btn  nav_search-btn" type="submit">
                             <i class="fa fa-search" aria-hidden="true"></i>
                         </button>
-                    </form>
+                    </form> --}}
                 </div>
                 <div class="custom_menu-btn">
                     <button onclick="openNav()">

@@ -62,35 +62,46 @@
   </section>
 
   <!-- Modal -->
-  <div class="modal fade" id="modalTambahMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-    <!--Content-->
-    <div class="modal-content text-center">
-      <!--Header-->
-      <div class="modal-header d-flex justify-content-center">
-        <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Tambah Menu</h3>
+  <div class="modal fade" id="modalTambahMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+      <!--Content-->
+      <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Tambah Menu</h3>
+        </div>
+
+        <!--Modal Body-->
+        <div class="modal-body">
+          {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
+          <form id="IputMenuForm" action="/menu/add" method="POST">
+            @csrf
+            @method('post')
+            <input type="text" class="form-control" placeholder="Nama" name="namaMenu">
+            <br>
+            <input type="number" class="form-control" placeholder="Harga" name="hargaMenu">
+            <br>
+            {{-- <div class="form-group">
+            <input type="text" class="form-control" placeholder="Deskripsi" name="deskripsiMenu" style="height: 100px; padding-bottom: 3rem; overflow-y: auto;">
+            </div> --}}
+            <div class="form-group">
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Deskripsi" name="deskripsiMenu"></textarea>
+            </div>
+            <input type="hidden" name="shop_id" value="{{ $shop_id }}">
+            
+            
+            
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+              {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
+              <button type="submit" class="btn btn-success">Submit</button>
+              <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <!--Modal Body-->
-      <div class="modal-body">
-        <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p>
-        <form>
-          <input type="number" class="form-control" placeholder="Jumlah" name="jumlahMenu">
-          <input type="hidden" name="menu_id" value="{{ $shop_id }}">
-        </form>
-
-
-      </div>
-
-      <!--Footer-->
-      <div class="modal-footer flex-center">
-        <a href="" class="btn  btn-outline-danger">Yes</a>
-        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
-      </div>
+      <!--/.Content-->
     </div>
-    <!--/.Content-->
   </div>
-</div>
 <!-- EndModal -->
 @endsection

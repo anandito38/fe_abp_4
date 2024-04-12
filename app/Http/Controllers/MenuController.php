@@ -76,12 +76,14 @@ class MenuController extends Controller
             $hargaMenu = $request->hargaMenu;
             $stokMenu = 0;
             $deskripsiMenu = $request->deskripsiMenu;
+            $shop_id = $request->shop_id;
 
             $api_request = [
                 'namaMenu' => $namaMenu,
                 'hargaMenu' => $hargaMenu,
                 'stokMenu' => $stokMenu,
-                'deskripsiMenu' => $deskripsiMenu
+                'deskripsiMenu' => $deskripsiMenu,
+                'shop_id' => $shop_id
             ];
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/menu/add', $api_request);
@@ -91,7 +93,8 @@ class MenuController extends Controller
                 toastr()->success('Menu added succesfully', 'Menu');
                 return redirect('/index');
             } else {
-                return view('errors.404');
+                toastr()->error('Failed to add menu', 'Menu');
+                return redirect('/index');
             }
 
         }catch(Exception $error){

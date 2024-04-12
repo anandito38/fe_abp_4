@@ -158,74 +158,81 @@
       </div>
     </section>
     <!-- end slider section -->
+
+    
   </div>
 
+  <!-- Menu section -->
 
-  <section class="recipe_section layout_padding-top">
-    <div class="container" style="margin-bottom: 70px">
-      <div class="heading_container heading_center">
-        <h2>
-          Menu Kantin 
-        </h2>
-      </div>
-      <div>
-        <div class="container">
-          <br/>
-          <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-6">
-              <form class="card card-sm">
-                <div class="card-body row no-gutters align-items-center">
-                  {{-- <div class="col-auto">
-                    <i class="fas fa-search h4 text-body"></i>
-                  </div> --}}
-                  <!--end of col-->
-                  <div class="col">
-                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Nama Menu atau Toko" style="text-align: center;" oninput="searchMenu(this.value)">
+
+  <section class="menu_section">
+    <section class="recipe_section layout_padding-top">
+      <div class="container" style="margin-bottom: 70px; width: 90%; max-width: 1200px; height: 1000px; overflow-y: auto; padding-right: 2rem;">
+        <div class="heading_container heading_center" style="position: sticky; top: 0; background-color: white; padding: 10px; z-index: 1000;">
+          <h2>
+            Menu Kantin 
+          </h2>
+        </div>
+        <div>
+          <div class="container">
+            <br/>
+            <div class="row justify-content-center">
+              <div class="col-12 col-md-10 col-lg-6">
+                <form class="card card-sm">
+                  <div class="card-body row no-gutters align-items-center">
+                    <!-- <div class="col-auto">
+                      <i class="fas fa-search h4 text-body"></i>
+                    </div> -->
+                    <!--end of col-->
+                    <div class="col">
+                      <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Nama Menu atau Toko" style="text-align: center;" oninput="searchMenu(this.value)">
+                    </div>
+                    <!--end of col-->
+                    <!-- <div class="col-auto">
+                      <button class="btn btn-lg btn-success" type="submit">Search</button>
+                    </div> -->
+                    <!--end of col-->
                   </div>
-                  <!--end of col-->
-                  {{-- <div class="col-auto">
-                    <button class="btn btn-lg btn-success" type="submit">Search</button>
-                  </div> --}}
-                  <!--end of col-->
-                </div>
-              </form>
-            </div>
-            <!--end of col-->
-          </div>
-        </div>
-      </div>
-      <div class="row" id="menuList">
-        @foreach ($menus as $menu)
-        <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
-          <div class="box">
-            <a href="/shop/{{ $menu['shop_id'] }}">
-              <div class="img-box">
-                <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
+                </form>
               </div>
-            </a>
-            <div class="detail-box">
-              <h4>
-                {{ $menu['namaMenu'] }}.
-                <br>
-                {{ $menu['hargaMenu'] }}
-              </h4>
-              <h6>
-                {{ $menu['deskripsiMenu'] }} dari
-                {{ $menu['shop_namaToko'] }}
-              </h6>
-              <a href="/shop/{{ $menu['shop_id'] }}">Go</a>
+              <!--end of col-->
             </div>
           </div>
         </div>
-        @endforeach
+        <div class="row" id="menuList">
+          @foreach ($menus as $menu)
+          <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
+            <div class="box">
+              <a href="/shop/{{ $menu['shop_id'] }}">
+                <div class="img-box">
+                  <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                  {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
+                </div>
+              </a>
+              <div class="detail-box">
+                <h4>
+                  {{ $menu['namaMenu'] }}.
+                  <br>
+                  {{ $menu['hargaMenu'] }}
+                </h4>
+                <h6>
+                  {{ $menu['deskripsiMenu'] }} dari
+                  {{ $menu['shop_namaToko'] }}
+                </h6>
+                <a href="/shop/{{ $menu['shop_id'] }}">Go</a>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+        <!-- Tambahkan elemen untuk menampilkan pesan "Menu tidak ditemukan" -->
+        <div id="noMenuFound" style="display: none; text-align: center;">
+          <h5>Menu atau Toko tidak ditemukan.</h5>
+        </div>
       </div>
-      <!-- Tambahkan elemen untuk menampilkan pesan "Menu tidak ditemukan" -->
-      <div id="noMenuFound" style="display: none; text-align: center;">
-        <h5>Menu atau Toko tidak ditemukan.</h5>
-      </div>
-    </div>
+    </section>
   </section>
+  
 
 
   <!-- app section -->
@@ -266,19 +273,19 @@
 
   </section>
 
-
-  <div class="footer_container">
-    <!-- footer section -->
-    <footer class="footer_section ">
-      <div class="container">
-        <p>
-          &copy; <span id="displayYear"></span> Develop BY ABP Kelompok 4
-        </p>
-      </div>
-    </footer>
-    <!-- footer section -->
-
-  </div>
+  
+  <!-- footer section -->
+  <section class="footer_section">
+    <div class="footer_container">
+      <footer class="footer_section ">
+        <div class="container">
+          <p>
+            &copy; <span id="displayYear"></span> Develop BY ABP Kelompok 4
+          </p>
+        </div>
+      </footer>
+    </div>
+  </section>
 
 
   <script>

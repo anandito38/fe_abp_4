@@ -61,7 +61,6 @@
                Already have account? <a href="/login">Login now</a>
             </div>
       </form>
-      </form>
    </div>
    <script>
       const togglePassword = document.querySelector("#togglePassword");

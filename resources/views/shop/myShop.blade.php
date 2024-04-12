@@ -43,8 +43,10 @@
                 {{-- @method('get') --}}
                 <div class="img-box">
                     <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
-                    <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                    {{-- <img src="{{ asset('images/toko.png')}}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">> --}}
+                    <a data-toggle="modal" data-target="#modalEditShop" data-nama-toko="{{ $shop['namaToko'] }}" data-nomor-toko="{{ $shop['nomorToko'] }}" data-lokasi-toko="{{ $shop['lokasiToko'] }}"  data-id-toko="{{ $shop['id'] }}">
+                      <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                      {{-- <img src="{{ asset('images/toko.png')}}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">> --}}
+                    </a>
                     <div class="detail-box">
                       <button type="submit" class="shop-link">
                         Go!
@@ -71,7 +73,7 @@
     </div>
   </section>
 
-  <!-- Modal -->
+  <!-- ModalTambahShop -->
   <div class="modal fade" id="modalTambahShop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
       <!--Content-->
@@ -112,6 +114,73 @@
       </div>
       <!--/.Content-->
     </div>
-  </div>>
-<!-- EndModal -->
+  </div>
+  <!-- EndModal -->
+
+  <!-- ModalEditShop -->
+  <div class="modal fade" id="modalEditShop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+      <!--Content-->
+      <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Edit Toko</h3>
+        </div>
+
+        <!--Modal Body-->
+        <div class="modal-body">
+          {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
+          <form id="EditShopForm" action="/shop/edit" method="POST">
+            @csrf
+            @method('post')
+            <input type="text" class="form-control" placeholder="Nama" name="namaToko" id="oldNamaToko" value="{{ $shop['namaToko'] }}">
+            <br>
+            <input type="number" class="form-control" placeholder="Nomor gunakan 0 didepan" name="nomorToko" id="oldNomorToko" value="{{ $shop['nomorToko'] }}">
+            <br>
+            {{-- <div class="form-group">
+            <input type="text" class="form-control" placeholder="Deskripsi" name="deskripsiMenu" style="height: 100px; padding-bottom: 3rem; overflow-y: auto;">
+            </div> --}}
+            <div class="form-group">
+              <textarea class="form-control" rows="3" placeholder="Lokasi" name="lokasiToko" id="oldLokasiToko" value="{{ $shop['lokasiToko'] }}"></textarea>
+            </div>
+            <input type="hidden" name="user_id" value="{{ $user_id }}">
+            <input type="hidden" name="id" id="idToko" value="{{ $shop['id'] }}">            
+            
+            
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+              {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
+              <button type="submit" class="btn btn-success">Submit</button>
+              <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  <!-- EndModal -->
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#modalEditShop').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Tombol yang memicu modal
+        var namaToko = button.data('nama-toko'); // Ambil nilai nama toko dari atribut data
+        var nomorToko = button.data('nomor-toko'); 
+        var lokasiToko = button.data('lokasi-toko');
+        var idToko = button.data('id-toko'); 
+        var modal = $(this);
+        // modal.find('.modal-body #oldNamaToko').val(namaToko); // Isi nilai nama toko ke dalam input dalam modal
+        modal.find('#oldNamaToko').val(namaToko);
+        modal.find('#oldNomorToko').val(nomorToko);
+        modal.find('#oldLokasiToko').val(lokasiToko); 
+        modal.find('#idToko').val(idToko); 
+      });
+    });
+  </script>
+  
+  
 @endsection

@@ -101,6 +101,46 @@ class MenuController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
+
+    public function editMenu(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application\json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            // dd($headers);
+
+            $id = $request->id;
+            $namaMenu = $request->namaMenu;
+            $hargaMenu = $request->hargaMenu;
+            $stokMenu = $request->stokMenu;
+            $deskripsiMenu = $request->deskripsiMenu;
+
+            $api_request = [
+                'id' => $id,
+                'namaMenu' => $namaMenu,
+                'hargaMenu' => $hargaMenu,
+                'stokMenu' => $stokMenu,
+                'deskripsiMenu' => $deskripsiMenu,
+            ];
+
+            $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/menu/edit', $api_request);
+            $data = $response->json();
+            // dd($data);
+            if ($data['status'] == 'success') {
+                toastr()->success('Menu edited succesfully', 'Menu');
+                return redirect('/index');
+            } else {
+                toastr()->error('Failed to edit menu', 'Menu');
+                return redirect('/index');
+            }
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
     
 
 }

@@ -49,7 +49,7 @@ class ShopController extends Controller
 
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byShop', $api_request);
             $data = $response->json();
-            // dd($data);
+            // dd($data['data']);
 
 
 
@@ -132,6 +132,46 @@ class ShopController extends Controller
                 return redirect('/index');
             } else {
                 toastr()->error('Failed to add shop', 'Shop');
+                return redirect('/index');
+            }
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
+    public function editShop(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application\json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            // dd($headers);
+
+            $id = $request->id;
+            $namaToko = $request->namaToko;
+            $nomorToko = $request->nomorToko;
+            $lokasiToko = $request->lokasiToko;
+            $user_id = $request->user_id;
+
+            $api_request = [
+                'id' => $id,
+                'namaToko' => $namaToko,
+                'nomorToko' => $nomorToko,
+                'lokasiToko' => $lokasiToko,
+                'user_id' => $user_id,
+            ];
+
+            $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/shop/edit', $api_request);
+            $data = $response->json();
+            // dd($data);
+            if ($data['status'] == 'success') {
+                toastr()->success('Shop edit succesfully', 'Shop');
+                return redirect('/index');
+            } else {
+                toastr()->error('Failed to edit shop', 'Shop');
                 return redirect('/index');
             }
 

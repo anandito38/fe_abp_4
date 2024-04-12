@@ -47,12 +47,14 @@ Route::controller(MenuController::class)->group(function(){
     Route::get('/menu/all', 'getAllMenu');
     Route::post('/menu/byShop', 'getMenuById');
     Route::post('/menu/add', 'addMenu');
+    Route::post('/menu/edit', 'editMenu');
 });
 Route::controller(ShopController::class)->group(function(){
     Route::get('/shop/all', 'getAllShop');
     Route::post('/shop/byUser', 'getShopByUserId');
     Route::post('/shop/byUser/menu', 'getShopMenuByUserId');
     Route::post('/shop/add', 'addShop');
+    Route::post('/shop/edit', 'editShop');
 });
 
 Route::group([], function(){

@@ -180,6 +180,8 @@ class AuthController extends Controller
             $data = $response->json();
             $data2 = $response2->json();
 
+            // dd($data2['data']);
+
             if ($data['status'] == 'success') {
                 return view('index', ['cekLogin' => $data, 'userAuth' => $user['data']], ['menus'=>$data2['data']]);
             } else {

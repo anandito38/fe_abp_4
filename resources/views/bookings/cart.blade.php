@@ -21,22 +21,14 @@
         </h2>
       </div>
       <div class="row">
-        @foreach ($menus as $menu)
+        {{-- @foreach ($menus as $menu)
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
-            @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
-              <a  data-toggle="modal" data-target="#modalAddBooking">
-                <div class="img-box">
-                  <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                  {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
-                </div>
-              </a>
-            @else
+            <a  data-toggle="modal" data-target="#modalTambahMenu">
               <div class="img-box">
                 <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
               </div>
-            @endif
+            </a>
             <div class="detail-box">
               <h4>
                 {{ $menu['namaMenu'] }}.
@@ -48,7 +40,7 @@
             </div>
           </div>
         </div>
-        @endforeach
+        @endforeach --}}
       </div>
       {{-- <div class="btn-box">
         <a href="">
@@ -60,7 +52,8 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalAddBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  {{-- <div class="modal fade" id="modalTambahMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
     <!--Content-->
     <div class="modal-content text-center">
@@ -74,7 +67,7 @@
         <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p>
         <form>
           <input type="number" class="form-control" placeholder="Jumlah" name="jumlahMenu">
-          {{-- <input type="hidden" name="menu_id" value="{{ $menu['id'] }}"> --}}
+          <input type="hidden" name="menu_id" value="{{ $menu['id'] }}">
         </form>
 
 
@@ -87,7 +80,7 @@
       </div>
     </div>
     <!--/.Content-->
-  </div>
-</div>
+    </div>
+  </div> --}}
 <!-- EndModal -->
 @endsection

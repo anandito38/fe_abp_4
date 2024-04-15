@@ -55,7 +55,7 @@
                 {{-- @method('get') --}}
                 <div class="img-box">
                     <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
-                    <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">>
+                    <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                     {{-- <img src="{{ asset('images/toko.png')}}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">> --}}
                     <div class="detail-box">
                       <button type="submit" class="shop-link">

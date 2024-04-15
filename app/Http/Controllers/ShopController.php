@@ -20,7 +20,7 @@ class ShopController extends Controller
                 ];
 
                 $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/shop/all');
-
+                // dd($response);
                 $data = $response->json();
                 // dd($data);
                 if ($data['status'] == 'success') {
@@ -42,7 +42,6 @@ class ShopController extends Controller
             // dd($headers);
 
             $shop_id = $request->shop_id;
-
             $api_request = [
                 'shop_id' => $shop_id,
             ];

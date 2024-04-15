@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +57,15 @@ Route::controller(ShopController::class)->group(function(){
     Route::post('/shop/add', 'addShop');
     Route::post('/shop/edit', 'editShop');
 });
+
+Route::controller(BookingController::class)->group(function(){
+    // Route::get('/shop/all', 'getAllShop');
+    // Route::post('/shop/byUser', 'getShopByUserId');
+    // Route::post('/shop/byUser/menu', 'getShopMenuByUserId');
+    // Route::post('/shop/add', 'addShop');
+    // Route::post('/shop/edit', 'editShop');
+});
+
 
 Route::group([], function(){
     Route::get('/login', function () {

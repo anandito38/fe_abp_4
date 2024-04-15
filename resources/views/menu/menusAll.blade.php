@@ -46,12 +46,19 @@
         @foreach ($menus as $menu)
         <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
           <div class="box">
-            <a href="/shop/{{ $menu['shop_id'] }}">
+            @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
+              <a data-toggle="modal" data-target="#modalAddBooking">
+                <div class="img-box">
+                  <img src="" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                  {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
+                </div>
+              </a>
+            @else
               <div class="img-box">
                 <img src="" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                 {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
               </div>
-            </a>
+            @endif
             <div class="detail-box">
               <h4>
                 {{ $menu['namaMenu'] }}.
@@ -62,7 +69,7 @@
                 {{ $menu['deskripsiMenu'] }} dari
                 {{ $menu['shop_namaToko'] }}
               </h6>
-              <a href="/shop/{{ $menu['shop_id'] }}">Go</a>
+              {{-- <a href="/shop/{{ $menu['shop_id'] }}">Go</a> --}}
             </div>
           </div>
         </div>
@@ -75,6 +82,40 @@
     </div>
   </section>
 
+<!-- Modal -->
+  <div class="modal fade" id="modalAddBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+      <!--Content-->
+      <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Tambah Menu</h3>
+        </div>
+
+        <!--Modal Body-->
+        <div class="modal-body">
+          <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p>
+          <form>
+            <input type="number" class="form-control" placeholder="Jumlah" name="jumlahMenu">
+            {{-- <input type="hidden" name="menu_id" value="{{ $menu['id'] }}"> --}}
+          </form>
+
+
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer flex-center">
+          <a href="" class="btn  btn-outline-danger">Yes</a>
+          <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+<!-- EndModal -->
+  
+  
+  
   <script>
     function searchMenu(keyword) {
       // Ambil semua elemen menu

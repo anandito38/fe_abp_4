@@ -113,47 +113,49 @@
 <!-- EndModal -->
 
    <!-- ModalEditMenu -->
-   <div class="modal fade" id="modalEditMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-      <!--Content-->
-      <div class="modal-content text-center">
-        <!--Header-->
-        <div class="modal-header d-flex justify-content-center">
-          <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Edit Menu</h3>
-        </div>
+   @if (isset($menus) && !empty($menus))
+    <div class="modal fade" id="modalEditMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+          <!--Header-->
+          <div class="modal-header d-flex justify-content-center">
+            <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Edit Menu</h3>
+          </div>
 
-        <!--Modal Body-->
-        <div class="modal-body">
-          {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
-          <form id="EditShopForm" action="/menu/edit" method="POST">
-            @csrf
-            @method('post')
-            <input type="text" class="form-control" placeholder="Nama" name="namaMenu" id="oldNamaMenu" value="{{ $menu['namaMenu'] }}">
-            <br>
-            <input type="number" class="form-control" placeholder="Harga" name="hargaMenu" id="oldHargaMenu" value="{{ $menu['hargaMenu'] }}">
-            <br>
-            <div class="form-group">
-              <textarea class="form-control" rows="3" placeholder="Deskripsi" name="deskripsiMenu" id="oldDeskripsiMenu" value="{{ $menu['deskripsiMenu'] }}"></textarea>
-            </div>
-            
-            <label for="stokMenu">Tambah Stok</label>
-            <input type="number" class="form-control" placeholder="stokMenu" name="stokMenu" id="oldStokMenu" value="0">
+          <!--Modal Body-->
+          <div class="modal-body">
+            {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
+            <form id="EditShopForm" action="/menu/edit" method="POST">
+              @csrf
+              @method('post')
+              <input type="text" class="form-control" placeholder="Nama" name="namaMenu" id="oldNamaMenu" value="{{ $menu['namaMenu'] }}">
+              <br>
+              <input type="number" class="form-control" placeholder="Harga" name="hargaMenu" id="oldHargaMenu" value="{{ $menu['hargaMenu'] }}">
+              <br>
+              <div class="form-group">
+                <textarea class="form-control" rows="3" placeholder="Deskripsi" name="deskripsiMenu" id="oldDeskripsiMenu" value="{{ $menu['deskripsiMenu'] }}"></textarea>
+              </div>
+              
+              <label for="stokMenu">Tambah Stok</label>
+              <input type="number" class="form-control" placeholder="stokMenu" name="stokMenu" id="oldStokMenu" value="0">
 
-            <input type="hidden" name="id" id="idMenu" value="{{ $menu['id'] }}"">            
-            
-            
-            <!--Footer-->
-            <div class="modal-footer flex-center">
-              {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
-              <button type="submit" class="btn btn-success">Submit</button>
-              <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
-            </div>
-          </form>
+              <input type="hidden" name="id" id="idMenu" value="{{ $menu['id'] }}"">            
+              
+              
+              <!--Footer-->
+              <div class="modal-footer flex-center">
+                {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
+              </div>
+            </form>
+          </div>
         </div>
+        <!--/.Content-->
       </div>
-      <!--/.Content-->
     </div>
-  </div>
+  @endif
   <!-- EndModal -->
 
 
@@ -175,4 +177,20 @@
       });
     });
   </script>
+
+<script>
+  $(document).ready(function(){
+    $('#modalAddCart').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Tombol yang memicu modal
+      var idBooking = button.data('booking-id'); // Ambil nilai nama toko dari atribut data
+      var idMenu = button.data('menu-id');
+      var stokMenu = button.data('menu-stok'); 
+      var modal = $(this);
+      // modal.find('.modal-body #oldNamaToko').val(namaToko); // Isi nilai nama toko ke dalam input dalam modal
+      modal.find('#idBooking').val(idBooking);
+      modal.find('#idMenu').val(idMenu);
+      modal.find('#stokMenu').attr('placeholder', 'Sisa Stok: ' + stokMenu);
+    });
+  });
+</script>
 @endsection

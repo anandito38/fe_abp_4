@@ -188,8 +188,16 @@ class AuthController extends Controller
             // dd($data3['data'][0]['id']);
 
 
+
             if ($data['status'] == 'success') {
-                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data'], 'menus'=>$data2['data'], 'bookingId'=>$data3['data'][0]['id']]);
+                if (isset($data3['data'][0]['id'])) {
+                    $bookingId = $data3['data'][0]['id'];
+                } else {
+                    $bookingId = null;
+                }
+
+                
+                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data'], 'menus' => $data2['data'], 'bookingId' => $bookingId, 'userId' => $user['data']['id']]);
             } else {
                 return view('index');
             }

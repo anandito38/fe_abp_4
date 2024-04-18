@@ -11,7 +11,6 @@ class MenuController extends Controller
     public function getAllMenu()
     {
         try{
-
                 if (isset($_COOKIE['token'])) {
                     $token = $_COOKIE['token'];
                     $headers = [
@@ -33,12 +32,22 @@ class MenuController extends Controller
                 $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all');
                 $data = $response->json();
                 
+                $api_request = [
+                    'user_id' => $user['data']['id']
+                ];
+                $response3 = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/prog/byUser', $api_request );
+                $data3 = $response3->json();
                 
                 // dd($data2);
                 // dd($user);
                 if ($data['status'] == 'success') {
                     if (isset($_COOKIE['token'])){
-                        return view('menu.menusAll',['menus'=>$data['data']], ['cekLogin' => $data2, 'userAuth' => $user['data']]);
+                        if (isset($data3['data'][0]['id'])) {
+                            $bookingId = $data3['data'][0]['id'];
+                        } else {
+                            $bookingId = null;
+                        }
+                        return view('menu.menusAll',['menus'=>$data['data'], 'cekLogin' => $data2, 'userAuth' => $user['data'], 'bookingId' => $bookingId]);
                     }else {
                         return view('menu.menusAll',['menus'=>$data['data']]);
                     }

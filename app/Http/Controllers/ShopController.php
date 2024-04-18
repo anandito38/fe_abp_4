@@ -129,6 +129,7 @@ class ShopController extends Controller
             if ($data['status'] == 'success') {
                 toastr()->success('Shop added succesfully', 'Shop');
                 return redirect('/index');
+
             } else {
                 toastr()->error('Failed to add shop', 'Shop');
                 return redirect('/index');
@@ -169,6 +170,7 @@ class ShopController extends Controller
             if ($data['status'] == 'success') {
                 toastr()->success('Shop edit succesfully', 'Shop');
                 return redirect('/index');
+
             } else {
                 toastr()->error('Failed to edit shop', 'Shop');
                 return redirect('/index');

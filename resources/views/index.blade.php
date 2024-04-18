@@ -33,7 +33,7 @@
                                   @php
                                       $data = Session::get('userInfo');
                                   @endphp
-                                      <input type="hidden" name="user_id" value="1">
+                                      <input type="hidden" name="user_id" value="{{ $userId }}">
                                       {{-- <input type="hidden" name="user_id" value="{{ $data['data']['id'] }}"> --}}
                                       <button class="dropdown-item" type="submit" style="margin-left:25px" >
                                             Myshop
@@ -198,47 +198,49 @@
         </div>
         <div class="row" id="menuList">
           @foreach ($menus as $menu)
-          <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
-            <div class="box">
-              @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
-                <a data-toggle="modal" data-target="#modalAddCart" data-booking-id="{{ $bookingId }}" data-menu-id="{{ $menu['id'] }}">
-                  <div class="img-box">
-                    <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                    {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
-                  </div>
-                </a>
-              @else
-                <div class="img-box">
-                  <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                  {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
-                </div>
-              @endif
-              <div class="detail-box">
-                <h4>
-                  {{ $menu['namaMenu'] }}.
-                  <br>
-                  {{ $menu['hargaMenu'] }}
-                </h4>
-                <h6>
-                  {{ $menu['deskripsiMenu'] }} dari
-                  {{ $menu['shop_namaToko'] }}
-                </h6>
-                <form action="/menu/byShop" method="POST">
-                  @csrf
-                  {{-- @method('get') --}}
-                  <div class="img-box">
-                      <input type="hidden" name="shop_id" value="{{ $menu['shop_id'] }}">
-                      {{-- <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
-                      <div class="detail-box">
-                        <button type="submit" class="shop-link-1" style="font-size: 12px;">
-                          {{ $menu['shop_namaToko'] }}
-                        </button>
+            @if ($menu['stokMenu'] != 0)
+              <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
+                <div class="box">
+                  @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
+                    <a data-toggle="modal" data-target="#modalAddCart" data-booking-id="{{ $bookingId }}" data-menu-id="{{ $menu['id'] }}" data-menu-stok="{{ $menu['stokMenu'] }}">
+                      <div class="img-box">
+                        <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                        {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
                       </div>
+                    </a>
+                  @else
+                    <div class="img-box">
+                      <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                      {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
+                    </div>
+                  @endif
+                  <div class="detail-box">
+                    <h4>
+                      {{ $menu['namaMenu'] }}.
+                      <br>
+                      {{ $menu['hargaMenu'] }}
+                    </h4>
+                    <h6>
+                      {{ $menu['deskripsiMenu'] }} dari
+                      {{ $menu['shop_namaToko'] }}
+                    </h6>
+                    <form action="/menu/byShop" method="POST">
+                      @csrf
+                      {{-- @method('get') --}}
+                      <div class="img-box">
+                          <input type="hidden" name="shop_id" value="{{ $menu['shop_id'] }}">
+                          {{-- <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
+                          <div class="detail-box">
+                            <button type="submit" class="shop-link-1" style="font-size: 12px;">
+                              {{ $menu['shop_namaToko'] }}
+                            </button>
+                          </div>
+                      </div>
+                    </form>
                   </div>
-                </form>
+                </div>
               </div>
-            </div>
-          </div>
+            @endif
           @endforeach
         </div>
         <!-- Tambahkan elemen untuk menampilkan pesan "Menu tidak ditemukan" -->
@@ -319,13 +321,8 @@
         <form id="Cekout" action="/menu/cart/add" method="POST">
           @csrf
           @method('post')
-          <input type="number" class="form-control" placeholder="Jumlah" name="quantity">
+          <input type="number" class="form-control" id="stokMenu" placeholder="Sisa Stok: {{ $menu['stokMenu'] }}" name="quantity">
           <br>
-          {{-- <input type="number" class="form-control" placeholder="Nomor Meja" name="nomorMeja"> --}}
-          {{-- <br>           --}}
-          {{-- <div class="form-group">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Lokasi" name="lokasiToko"></textarea>
-          </div> --}}
           <input type="hidden" name="bookingId" id="idBooking" value="{{ $bookingId }}">
           <input type="hidden" name="menuId" id="idMenu" value="{{ $menu['id'] }}">
           
@@ -384,11 +381,13 @@
       $('#modalAddCart').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Tombol yang memicu modal
         var idBooking = button.data('booking-id'); // Ambil nilai nama toko dari atribut data
-        var idMenu = button.data('menu-id'); 
+        var idMenu = button.data('menu-id');
+        var stokMenu = button.data('menu-stok'); 
         var modal = $(this);
         // modal.find('.modal-body #oldNamaToko').val(namaToko); // Isi nilai nama toko ke dalam input dalam modal
         modal.find('#idBooking').val(idBooking);
         modal.find('#idMenu').val(idMenu);
+        modal.find('#stokMenu').attr('placeholder', 'Sisa Stok: ' + stokMenu);
       });
     });
   </script>

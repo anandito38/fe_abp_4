@@ -116,47 +116,49 @@
   <!-- EndModal -->
 
   <!-- ModalEditShop -->
+  @if (isset($shops) && !empty($shops))
   <div class="modal fade" id="modalEditShop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-      <!--Content-->
-      <div class="modal-content text-center">
-        <!--Header-->
-        <div class="modal-header d-flex justify-content-center">
-          <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Edit Toko</h3>
-        </div>
+      <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+          <!--Header-->
+          <div class="modal-header d-flex justify-content-center">
+            <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Edit Toko</h3>
+          </div>
 
-        <!--Modal Body-->
-        <div class="modal-body">
-          {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
-          <form id="EditShopForm" action="/shop/edit" method="POST">
-            @csrf
-            @method('post')
-            <input type="text" class="form-control" placeholder="Nama" name="namaToko" id="oldNamaToko" value="{{ $shop['namaToko'] }}">
-            <br>
-            <input type="number" class="form-control" placeholder="Nomor gunakan 0 didepan" name="nomorToko" id="oldNomorToko" value="{{ $shop['nomorToko'] }}">
-            <br>
-            {{-- <div class="form-group">
-            <input type="text" class="form-control" placeholder="Deskripsi" name="deskripsiMenu" style="height: 100px; padding-bottom: 3rem; overflow-y: auto;">
-            </div> --}}
-            <div class="form-group">
-              <textarea class="form-control" rows="3" placeholder="Lokasi" name="lokasiToko" id="oldLokasiToko" value="{{ $shop['lokasiToko'] }}"></textarea>
-            </div>
-            <input type="hidden" name="user_id" value="{{ $user_id }}">
-            <input type="hidden" name="id" id="idToko" value="{{ $shop['id'] }}">            
-            
-            
-            <!--Footer-->
-            <div class="modal-footer flex-center">
-              {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
-              <button type="submit" class="btn btn-success">Submit</button>
-              <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
-            </div>
-          </form>
+          <!--Modal Body-->
+          <div class="modal-body">
+            {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
+            <form id="EditShopForm" action="/shop/edit" method="POST">
+              @csrf
+              @method('post')
+              <input type="text" class="form-control" placeholder="Nama" name="namaToko" id="oldNamaToko" value="{{ $shop['namaToko'] }}">
+              <br>
+              <input type="number" class="form-control" placeholder="Nomor gunakan 0 didepan" name="nomorToko" id="oldNomorToko" value="{{ $shop['nomorToko'] }}">
+              <br>
+              {{-- <div class="form-group">
+              <input type="text" class="form-control" placeholder="Deskripsi" name="deskripsiMenu" style="height: 100px; padding-bottom: 3rem; overflow-y: auto;">
+              </div> --}}
+              <div class="form-group">
+                <textarea class="form-control" rows="3" placeholder="Lokasi" name="lokasiToko" id="oldLokasiToko" value="{{ $shop['lokasiToko'] }}"></textarea>
+              </div>
+              <input type="hidden" name="user_id" value="{{ $user_id }}">
+              <input type="hidden" name="id" id="idToko" value="{{ $shop['id'] }}">            
+              
+              
+              <!--Footer-->
+              <div class="modal-footer flex-center">
+                {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
+              </div>
+            </form>
+          </div>
         </div>
+        <!--/.Content-->
       </div>
-      <!--/.Content-->
     </div>
-  </div>
+  @endif
   <!-- EndModal -->
 
 

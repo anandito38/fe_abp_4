@@ -67,7 +67,7 @@ class CheckoutController extends Controller
 
 
             if ($data['status'] == 'success') {
-                return view('bookings.cart', ['carts' => $data['data']['Checkout']]);
+                return view('bookings.cart', ['carts' => $data['data']['Checkout'], 'bookingId' => $bookingId]);
             } else {
                 return redirect('/index');
             }
@@ -77,4 +77,45 @@ class CheckoutController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
+
+
+    public function deleteCart(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            // dd($headers);
+
+            
+            $bookingId = $request->bookingId;
+            $menuId = $request->menuId;
+            
+
+            $api_request = [
+                'bookingId' => $bookingId,
+                'menuId' => $menuId,
+            ];
+
+            $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/delete', $api_request);
+            $data = $response->json();
+
+
+            // dd($data);
+            if ($data['status'] == 'success') {
+                toastr()->success('Menu deleted succesfully', 'Shop');
+                return redirect('/index');
+            } else {
+                toastr()->error('Menu already exsist in cart', 'Shop');
+                return redirect('/index');
+            }
+            
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
 }

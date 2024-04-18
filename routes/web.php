@@ -72,7 +72,7 @@ Route::controller(BookingController::class)->group(function(){
 Route::controller(CheckoutController::class)->group(function(){
     Route::post('/menu/cart/add', 'addCart');
     Route::get('/booking/detail/menu/{bookingId}', 'showCart');
-
+    Route::post('/menu/cart/delete', 'deleteCart');
 });
 
 

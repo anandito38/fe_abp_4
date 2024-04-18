@@ -34,8 +34,21 @@
                         <td>{{ $cart['quantity'] }}</td>
                         <td class="col-auto">
                             <div class="d-flex">
-                                <a href="#" class="btn btn-warning mr-2">Edit</a>
-                                <a href="#" class="btn btn-danger mr-2">Delete</a>
+                              <form action="" method="POST">
+                                @csrf
+                                @method('post')
+                                <input type="hidden" name="bookingId" value="{{ $bookingId }}">
+                                <input type="hidden" name="menuId" value="{{ $cart['Menu']['id'] }}">
+                                <button type="submit" class="btn btn-warning mr-2">Edit</button>
+                              </form>
+
+                              <form action="/menu/cart/delete" method="POST">
+                                  @csrf
+                                  @method('post')
+                                  <input type="hidden" name="bookingId" value="{{ $bookingId }}">
+                                  <input type="hidden" name="menuId" value="{{ $cart['Menu']['id'] }}">
+                                  <button type="submit" class="btn btn-danger mr-2">Delete</button>
+                              </form>
                             </div>
                         </td>
                     </tr>

@@ -51,9 +51,15 @@
                       <button type="submit" class="shop-link">
                         Go!
                       </button>
+                      
                     </div>
-                </div>
-              </form>
+                  </div>
+                </form>
+                <a data-toggle="modal" data-target="#confirmDelete" data-shop-id="{{ $shop['id'] }}">
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalConfirmDelete" data-shop-id="{{ $shop['id'] }}">
+                    Delete
+                  </button>
+                </a>
               <div class="detail-box">
                 <h4>
                   {{ $shop['namaToko'] }}.
@@ -161,6 +167,36 @@
   @endif
   <!-- EndModal -->
 
+  <!-- ModalConfirmDelete -->
+  @if (isset($shops) && !empty($shops))
+  <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+      <!--Content-->
+      <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Confirm Delete</h3>
+        </div>
+        <!--Modal Body-->
+        <div class="modal-body">
+          <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Are you sure you want to delete this shop?</p>
+          <form id="deleteShopForm" action="/shop/delete" method="POST">
+            @csrf
+            @method('post')
+            <input type="hidden" name="shopId" id="shopId" value="{{ $shop['id'] }}">
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+              <button type="submit" class="btn btn-danger">Yes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  @endif
+  <!-- EndModal -->
 
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -182,5 +218,15 @@
     });
   </script>
   
+  <script>
+    $(document).ready(function(){
+      $('#modalConfirmDelete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Tombol yang memicu modal
+        var shopId = button.data('shop-id'); // Ambil nilai nama toko dari atribut data
+        var modal = $(this);
+        modal.find('#shopId').val(shopId);
+      });
+    });
+  </script>
   
 @endsection

@@ -180,4 +180,43 @@ class ShopController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
+
+    
+    
+    public function deleteShop(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            // dd($headers);
+
+            
+            $shopId = $request->shopId;
+            
+
+            $api_request = [
+                'id' => $shopId
+            ];
+
+            $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/shop/delete', $api_request);
+            $data = $response->json();
+
+            
+            // dd($data);
+            if ($data['status'] == 'success') {
+                toastr()->success('Shop deleted succesfully', 'Shop');
+                return redirect('/index');
+            } else {
+                toastr()->error('Shop deleted unsuccesful', 'Shop');
+                return redirect('/index');
+            }
+            
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
 }

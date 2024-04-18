@@ -68,7 +68,7 @@ class CheckoutController extends Controller
             // 
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/'.$bookingId);
             $data = $response->json();
-            // dd($data['data']['Checkout']);
+            // dd($bookingId);
 
 
             if ($data['status'] == 'success') {
@@ -92,17 +92,17 @@ class CheckoutController extends Controller
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$token
             ];
-            // dd($headers);
-
+            
             
             $bookingId = $request->bookingId;
             $menuId = $request->menuId;
             
-
+            
             $api_request = [
                 'bookingId' => $bookingId,
                 'menuId' => $menuId,
             ];
+            // dd($bookingId, $menuId, $api_request);
 
             $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/delete', $api_request);
             $data = $response->json();
@@ -113,7 +113,7 @@ class CheckoutController extends Controller
                 toastr()->success('Menu deleted succesfully', 'Shop');
                 return redirect('/index');
             } else {
-                toastr()->error('Menu already exsist in cart', 'Shop');
+                toastr()->error('Menu deleted unsuccesful', 'Shop');
                 return redirect('/index');
             }
             

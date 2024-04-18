@@ -59,6 +59,7 @@ Route::controller(ShopController::class)->group(function(){
     Route::post('/shop/byUser/menu', 'getShopMenuByUserId');
     Route::post('/shop/add', 'addShop');
     Route::post('/shop/edit', 'editShop');
+    Route::post('/shop/delete', 'deleteShop');
 });
 
 Route::controller(BookingController::class)->group(function(){

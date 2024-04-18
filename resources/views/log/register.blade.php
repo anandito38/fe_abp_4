@@ -55,7 +55,7 @@
             {{-- <input type="hidden" name="role" value="Seller"> --}}
             
             <div class="field">
-               <input type="submit" value="Login">
+               <input type="submit" value="Register">
             </div>
             <div class="signup-link">
                Already have account? <a href="/login">Login now</a>

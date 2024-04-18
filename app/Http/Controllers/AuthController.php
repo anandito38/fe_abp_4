@@ -140,6 +140,7 @@ class AuthController extends Controller
     }
 
     public function AuthDashboard(){
+        // dd($_COOKIE);
         if (!isset($_COOKIE['token'])) {
             $headers2 = [
                 'Accept' => 'application/json',
@@ -151,7 +152,7 @@ class AuthController extends Controller
                 $data2 = $response2->json();
     
                 if ($data2['status'] == 'success') {
-                    return view('index', ['menus'=>$data2['data']]);
+                    return view('index', ['menus'=>$data2['data'], 'bookingId'=> null]);
                 } else {
                     return view('index');
                 }
@@ -179,11 +180,16 @@ class AuthController extends Controller
 
             $data = $response->json();
             $data2 = $response2->json();
+            $api_request = [
+                'user_id' => $user['data']['id']
+            ];
+            $response3 = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/prog/byUser', $api_request );
+            $data3 = $response3->json();
+            // dd($data3['data'][0]['id']);
 
-            // dd($data2['data']);
 
             if ($data['status'] == 'success') {
-                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data']], ['menus'=>$data2['data']]);
+                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data'], 'menus'=>$data2['data'], 'bookingId'=>$data3['data'][0]['id']]);
             } else {
                 return view('index');
             }

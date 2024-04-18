@@ -12,36 +12,44 @@
   <!-- recipe section -->
 
   <section class="recipe_section layout_padding-top">
-    <div class="container" style="margin-bottom: 70px">
+    <d class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
-        <h2>Menu
-          @if (isset($menus ))
-            {{ $menus[0]['namaToko'] }}
-          @endif
-        </h2>
+        <h2>Cart</h2>
       </div>
-      <div class="row">
-        {{-- @foreach ($menus as $menu)
-        <div class="col-sm-6 col-md-4 mx-auto">
-          <div class="box">
-            <a  data-toggle="modal" data-target="#modalTambahMenu">
-              <div class="img-box">
-                <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-              </div>
-            </a>
-            <div class="detail-box">
-              <h4>
-                {{ $menu['namaMenu'] }}.
-                <br>
-                {{ $menu['hargaMenu'] }}
-              </h4>
-              <h6>
-                {{ $menu['deskripsiMenu'] }}</h6>
-            </div>
-          </div>
-        </div>
-        @endforeach --}}
-      </div>
+      <div class="table-responsive" style="padding-left: 4rem; padding-right: 4rem;">
+        <table class="table table-bordered table-striped" style="margin-top: 2rem; margin-left: auto; margin-right: auto;">
+            <thead>
+                <tr>
+                    <th>Nama Menu</th>
+                    <th>Harga</th>
+                    <th>Quantity</th>
+                    <th class="col-auto" style="width: 5rem">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($carts as $cart)
+                    <tr>
+                        <td>{{ $cart['Menu']['namaMenu'] }}</td>
+                        <td>{{ $cart['Menu']['hargaMenu'] }}</td>
+                        <td>{{ $cart['quantity'] }}</td>
+                        <td class="col-auto">
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-warning mr-2">Edit</a>
+                                <a href="#" class="btn btn-danger mr-2">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    
+    
+    
+    
+    
+      
+      
       {{-- <div class="btn-box">
         <a href="">
           Order Now

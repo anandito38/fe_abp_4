@@ -100,9 +100,7 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Lokasi" name="lokasiToko"></textarea>
             </div>
             <input type="hidden" name="user_id" value="{{ $user_id }}">
-            
-            
-            
+          
             <!--Footer-->
             <div class="modal-footer flex-center">
               {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}

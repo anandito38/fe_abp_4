@@ -43,7 +43,7 @@
                                   
                                 </form>
                             @elseif (isset($userAuth['role']) && $userAuth['role'] == 'Buyer') 
-                                <a class="dropdown-item" href="/cart">Keranjang</a>
+                                <a class="dropdown-item" href="/booking/detail/menu/{{ $bookingId }}">Cart</a>
                               
                             @endif
                         </div>
@@ -201,7 +201,7 @@
           <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
             <div class="box">
               @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
-                <a data-toggle="modal" data-target="#modalAddBooking">
+                <a data-toggle="modal" data-target="#modalAddCart" data-booking-id="{{ $bookingId }}" data-menu-id="{{ $menu['id'] }}">
                   <div class="img-box">
                     <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                     {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
@@ -304,7 +304,7 @@
   </section>
 
 <!-- Modal -->
-<div class="modal fade" id="modalAddBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalAddCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
     <!--Content-->
     <div class="modal-content text-center">
@@ -315,20 +315,32 @@
 
       <!--Modal Body-->
       <div class="modal-body">
-        <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p>
-        <form>
-          <input type="number" class="form-control" placeholder="Jumlah" name="jumlahMenu">
-          {{-- <input type="hidden" name="menu_id" value="{{ $menu['id'] }}"> --}}
+        {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
+        <form id="Cekout" action="/menu/cart/add" method="POST">
+          @csrf
+          @method('post')
+          <input type="number" class="form-control" placeholder="Jumlah" name="quantity">
+          <br>
+          {{-- <input type="number" class="form-control" placeholder="Nomor Meja" name="nomorMeja"> --}}
+          {{-- <br>           --}}
+          {{-- <div class="form-group">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Lokasi" name="lokasiToko"></textarea>
+          </div> --}}
+          <input type="hidden" name="bookingId" id="idBooking" value="{{ $bookingId }}">
+          <input type="hidden" name="menuId" id="idMenu" value="{{ $menu['id'] }}">
+          
+          
+        
+          <!--Footer-->
+          <div class="modal-footer flex-center">
+            {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
+            <button type="submit" class="btn btn-success">Submit</button>
+            <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
+          </div>
         </form>
-
-
       </div>
 
-      <!--Footer-->
-      <div class="modal-footer flex-center">
-        <a href="" class="btn  btn-outline-danger">Yes</a>
-        <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
-      </div>
+      
     </div>
     <!--/.Content-->
   </div>
@@ -363,5 +375,21 @@
         noMenuFound.style.display = 'none';
       }
     }
+  </script>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#modalAddCart').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Tombol yang memicu modal
+        var idBooking = button.data('booking-id'); // Ambil nilai nama toko dari atribut data
+        var idMenu = button.data('menu-id'); 
+        var modal = $(this);
+        // modal.find('.modal-body #oldNamaToko').val(namaToko); // Isi nilai nama toko ke dalam input dalam modal
+        modal.find('#idBooking').val(idBooking);
+        modal.find('#idMenu').val(idMenu);
+      });
+    });
   </script>
 @endsection

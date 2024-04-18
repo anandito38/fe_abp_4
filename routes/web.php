@@ -7,6 +7,9 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CheckoutController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,6 +67,12 @@ Route::controller(BookingController::class)->group(function(){
     // Route::post('/shop/byUser/menu', 'getShopMenuByUserId');
     // Route::post('/shop/add', 'addShop');
     // Route::post('/shop/edit', 'editShop');
+});
+
+Route::controller(CheckoutController::class)->group(function(){
+    Route::post('/menu/cart/add', 'addCart');
+    Route::get('/booking/detail/menu/{bookingId}', 'showCart');
+
 });
 
 

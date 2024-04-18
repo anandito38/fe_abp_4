@@ -14,7 +14,7 @@ class BookingController extends Controller
             
             $token = $_COOKIE['token'];
             $headers = [
-                'Accept' => 'application\json',
+                'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$token
             ];
             // dd($headers);

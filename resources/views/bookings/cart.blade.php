@@ -22,7 +22,8 @@
                 <tr>
                     <th>Nama Menu</th>
                     <th>Harga</th>
-                    <th>Quantity</th>
+                    <th>Sisa</th>
+                    <th>Jumlah</th>
                     <th class="col-auto" style="width: 5rem">Aksi</th>
                 </tr>
             </thead>
@@ -31,6 +32,7 @@
                     <tr>
                         <td>{{ $cart['Menu']['namaMenu'] }}</td>
                         <td>{{ $cart['Menu']['hargaMenu'] }}</td>
+                        <td>{{ $cart['Menu']['stokMenu'] }}</td>
                         <td>{{ $cart['quantity'] }}</td>
                         <td class="col-auto">
                             <div class="d-flex">

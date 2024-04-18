@@ -23,28 +23,33 @@ class CheckoutController extends Controller
             $bookingId = $request->bookingId;
             $menuId = $request->menuId;
             $quantity = $request->quantity;
+            $stokMenu = $request->stokMenu;
             
-
-            $api_request = [
-                'bookingId' => $bookingId,
-                'menuId' => $menuId,
-                'quantity' => $quantity,
-            ];
-
-            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/add', $api_request);
-            $data = $response->json();
-
-
-            // dd($data);
-            if ($data['status'] == 'success') {
-                toastr()->success('Menu added succesfully', 'Shop');
+            // dd($stokMenu);
+            if ($quantity > $stokMenu) {
+                toastr()->error('Quantity is more than stock', 'Shop');
                 return redirect('/index');
-            } else {
-                toastr()->error('Menu already exsist please edit in cart', 'Shop');
-                return redirect('/index');
+            }else {
+
+                $api_request = [
+                    'bookingId' => $bookingId,
+                    'menuId' => $menuId,
+                    'quantity' => $quantity,
+                ];
+    
+                $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/add', $api_request);
+                $data = $response->json();
+    
+    
+                // dd($data);
+                if ($data['status'] == 'success') {
+                    toastr()->success('Menu added succesfully', 'Shop');
+                    return redirect('/index');
+                } else {
+                    toastr()->error('Please fill the field correctly', 'Shop');
+                    return redirect('/index');
+                }
             }
-            
-
         }catch(Exception $error){
             return "Error: ".$error->getMessage();
         }

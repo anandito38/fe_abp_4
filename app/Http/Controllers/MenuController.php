@@ -87,11 +87,21 @@ class MenuController extends Controller
 
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byShop', $api_request);
             $data = $response->json();
+
+            $api_request2 = [
+                'user_id' => $user['data']['id']
+            ];
+            $response2 = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/prog/byUser', $api_request2 );
+            $data2 = $response2->json();
             
             if ($data['status'] == 'success') {
                 if (isset($_COOKIE['token'])){
-                    // dd($user);
-                    return view('menu.menus',['menus'=>$data['data'], 'shop_id' => $shop_id, 'cekLogin' => $data2, 'userAuth' => $user['data']]);
+                    if (isset($data2['data'][0]['id'])) {
+                        $bookingId = $data2['data'][0]['id'];
+                    } else {
+                        $bookingId = null;
+                    }
+                    return view('menu.menus',['menus'=>$data['data'], 'shop_id' => $shop_id, 'cekLogin' => $data2, 'userAuth' => $user['data'], 'bookingId' => $bookingId]);
                 }else {
                     // dd($user);
                     return view('menu.menus',['menus'=>$data['data']], ['shop_id' => $shop_id]);

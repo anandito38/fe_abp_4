@@ -57,6 +57,11 @@
                   stok : 
                   {{ $menu['stokMenu'] }}
                 </h6>
+                
+                <button class="btn btn-danger " data-toggle="modal" data-target="#modalConfirmDelete" data-menu-id="{{ $menu['id'] }}">
+                    Delete
+                </button>
+                
               </div>
             </div>
           </div>
@@ -110,10 +115,10 @@
       <!--/.Content-->
     </div>
   </div>
-<!-- EndModal -->
+  <!-- EndModal -->
 
-   <!-- ModalEditMenu -->
-   @if (isset($menus) && !empty($menus))
+  <!-- ModalEditMenu -->
+  @if (isset($menus) && !empty($menus))
     <div class="modal fade" id="modalEditMenu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
         <!--Content-->
@@ -158,6 +163,36 @@
   @endif
   <!-- EndModal -->
 
+  <!-- ModalConfirmDelete -->
+  @if (isset($menus) && !empty($menus))
+  <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+      <!--Content-->
+      <div class="modal-content text-center">
+        <!--Header-->
+        <div class="modal-header d-flex justify-content-center">
+          <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Confirm Delete</h3>
+        </div>
+        <!--Modal Body-->
+        <div class="modal-body">
+          <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Are you sure you want to delete this menu?</p>
+          <form id="deleteShopForm" action="/menu/delete" method="POST">
+            @csrf
+            @method('post')
+            <input type="hidden" name="menuId" id="idMenu" value="{{ $menu['id'] }}">
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+              <button type="submit" class="btn btn-danger">Yes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  @endif
+  <!-- EndModal -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
@@ -178,19 +213,15 @@
     });
   </script>
 
-<script>
-  $(document).ready(function(){
-    $('#modalAddCart').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget); // Tombol yang memicu modal
-      var idBooking = button.data('booking-id'); // Ambil nilai nama toko dari atribut data
-      var idMenu = button.data('menu-id');
-      var stokMenu = button.data('menu-stok'); 
-      var modal = $(this);
-      // modal.find('.modal-body #oldNamaToko').val(namaToko); // Isi nilai nama toko ke dalam input dalam modal
-      modal.find('#idBooking').val(idBooking);
-      modal.find('#idMenu').val(idMenu);
-      modal.find('#stokMenu').attr('placeholder', 'Sisa Stok: ' + stokMenu);
+  <script>
+    $(document).ready(function(){
+      $('#modalAddCamodalConfirmDeletert').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Tombol yang memicu modal
+        var idMenu = button.data('menu-id');
+        var modal = $(this);
+        // modal.find('.modal-body #oldNamaToko').val(namaToko); // Isi nilai nama toko ke dalam input dalam modal
+        modal.find('#idMenu').val(idMenu);
+      });
     });
-  });
-</script>
+  </script>
 @endsection

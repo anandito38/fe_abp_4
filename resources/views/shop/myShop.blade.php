@@ -38,36 +38,29 @@
           @foreach ($shops as $shop)
           <div class="col-sm-6 col-md-4 mx-auto">
             <div class="box">
-              <form action="/shop/byUser/menu" method="POST">
+              <form action="/shop/byUser/menu" method="POST" class="d-inline-block mr-2">
                 @csrf
-                {{-- @method('get') --}}
                 <div class="img-box">
                     <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
                     <a data-toggle="modal" data-target="#modalEditShop" data-nama-toko="{{ $shop['namaToko'] }}" data-nomor-toko="{{ $shop['nomorToko'] }}" data-lokasi-toko="{{ $shop['lokasiToko'] }}"  data-id-toko="{{ $shop['id'] }}">
-                      <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                      {{-- <img src="{{ asset('images/toko.png')}}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">> --}}
+                        <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                     </a>
                     <div class="detail-box">
-                      <button type="submit" class="shop-link">
-                        Go!
-                      </button>
-                      
+                        <button type="submit" class="btn btn-primary">Go!</button>
                     </div>
-                  </div>
-                </form>
-                <a data-toggle="modal" data-target="#confirmDelete" data-shop-id="{{ $shop['id'] }}">
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalConfirmDelete" data-shop-id="{{ $shop['id'] }}">
-                    Delete
-                  </button>
-                </a>
+                </div>
+              </form>
+            
+              <button type="button" class="btn btn-danger d-inline-block" data-toggle="modal" data-target="#modalConfirmDelete" data-shop-id="{{ $shop['id'] }}">Delete</button>
+            
+                
               <div class="detail-box">
                 <h4>
                   {{ $shop['namaToko'] }}.
                   <br>
-                  {{ $shop['nomorToko'] }}
+                  {{ $shop['nomorToko'] }} | {{ $shop['lokasiToko'] }}
+                  
                 </h4>
-                <h6>
-                  {{ $shop['lokasiToko'] }}</h6>
               </div>
             </div>
           </div>

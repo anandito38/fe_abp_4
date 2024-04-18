@@ -196,4 +196,40 @@ class MenuController extends Controller
     }
     
 
+    public function deleteMenu(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            
+            
+            $menuId = $request->menuId;
+            
+            $api_request = [
+                'id' => $menuId,
+            ];
+            // dd($bookingId, $menuId, $api_request);
+
+            $response = Http::withHeaders($headers)->delete($_ENV['BACKEND_API_ENDPOINT'].'/menu/delete', $api_request);
+            $data = $response->json();
+
+
+            // dd($data);
+            if ($data['status'] == 'success') {
+                toastr()->success('Menu deleted succesfully', 'Menu');
+                return redirect('/index');
+            } else {
+                toastr()->error('Menu deleted unsuccesful', 'Menu');
+                return redirect('/index');
+            }
+            
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
 }

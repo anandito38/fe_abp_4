@@ -52,6 +52,7 @@ Route::controller(MenuController::class)->group(function(){
     Route::post('/menu/byShop', 'getMenuById');
     Route::post('/menu/add', 'addMenu');
     Route::post('/menu/edit', 'editMenu');
+    Route::post('/menu/delete', 'deleteMenu');
 });
 Route::controller(ShopController::class)->group(function(){
     Route::get('/shop/all', 'getAllShop');

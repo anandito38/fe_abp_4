@@ -110,10 +110,10 @@ class CheckoutController extends Controller
 
             // dd($data);
             if ($data['status'] == 'success') {
-                toastr()->success('Menu deleted succesfully', 'Shop');
+                toastr()->success('Menu deleted succesfully', 'Cart');
                 return redirect('/index');
             } else {
-                toastr()->error('Menu deleted unsuccesful', 'Shop');
+                toastr()->error('Menu deleted unsuccesful', 'Cart');
                 return redirect('/index');
             }
             

@@ -184,7 +184,9 @@ class MenuController extends Controller
             // dd($data);
             if ($data['status'] == 'success') {
                 toastr()->success('Menu edited succesfully', 'Menu');
-                return redirect('/index');
+                // return redirect('/index');
+                return redirect('/shop/byUser');
+
             } else {
                 toastr()->error('Failed to edit menu', 'Menu');
                 return redirect('/index');

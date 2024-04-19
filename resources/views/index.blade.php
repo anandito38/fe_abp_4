@@ -27,13 +27,13 @@
                             @elseif(isset($userAuth['role']) && $userAuth['role'] == 'Seller') 
                                 {{-- <a class="dropdown-item" href="/Myshop">Myshop</a> --}}
                                 
-                                <form action="/shop/byUser" method="POST">
+                                <form action="/shop/byUser" method="GET">
                                   @csrf
                                   @if(Session::has('userInfo'))
                                   @php
                                       $data = Session::get('userInfo');
                                   @endphp
-                                      <input type="hidden" name="user_id" value="{{ $userId }}">
+                                      {{-- <input type="hidden" name="user_id" value="{{ $userId }}"> --}}
                                       {{-- <input type="hidden" name="user_id" value="{{ $data['data']['id'] }}"> --}}
                                       <button class="dropdown-item" type="submit" style="margin-left:25px" >
                                             Myshop

@@ -38,10 +38,11 @@
           @foreach ($shops as $shop)
           <div class="col-sm-6 col-md-4 mx-auto">
             <div class="box">
-              <form action="/shop/byUser/menu" method="POST" class="d-inline-block mr-2">
+              <form action="/shop/byUser/menu" method="GET" class="d-inline-block mr-2">
                 @csrf
                 <div class="img-box">
                     <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
+                    <input type="hidden" name="shop_name" value="{{ $shop['namaToko'] }}">
                     <a data-toggle="modal" data-target="#modalEditShop" data-nama-toko="{{ $shop['namaToko'] }}" data-nomor-toko="{{ $shop['nomorToko'] }}" data-lokasi-toko="{{ $shop['lokasiToko'] }}"  data-id-toko="{{ $shop['id'] }}">
                         <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                     </a>
@@ -56,9 +57,9 @@
                 
               <div class="detail-box">
                 <h4>
-                  {{ $shop['namaToko'] }}.
+                  {{ $shop['nomorToko'] }} | {{ $shop['namaToko'] }}.
                   <br>
-                  {{ $shop['nomorToko'] }} | {{ $shop['lokasiToko'] }}
+                  {{ $shop['lokasiToko'] }}
                   
                 </h4>
               </div>

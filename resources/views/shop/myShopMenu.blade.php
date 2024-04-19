@@ -12,9 +12,8 @@
   <section class="recipe_section layout_padding-top">
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
-        <h2>Menu Toko
-    
-            {{ $shop_id }}
+        <h2>Menu
+            {{ $shop_name }}
 
         </h2>
       </div>

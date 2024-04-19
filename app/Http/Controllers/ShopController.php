@@ -42,6 +42,7 @@ class ShopController extends Controller
             // dd($headers);
 
             $shop_id = $request->shop_id;
+            $shop_name = $request->shop_name;
             $api_request = [
                 'shop_id' => $shop_id,
             ];
@@ -50,13 +51,15 @@ class ShopController extends Controller
             $data = $response->json();
             // dd($data['data']);
 
+            
+
 
 
             if (isset($data)) {
                 if ($data['status'] == 'success') {
-                    return view('shop.myShopMenu', ['menus'=>$data['data']], ['shop_id' => $shop_id]);
+                    return view('shop.myShopMenu', ['menus'=>$data['data'], 'shop_id' => $shop_id, 'shop_name' => $shop_name]);
                 }else{
-                    return view('shop.myShopMenu', ['shop_id' => $shop_id]);
+                    return view('shop.myShopMenu', ['shop_id' => $shop_id, 'shop_name' => $shop_name]);
                 }
                 // return view('shop.myShop',['shop'=>$data['data']], ['menus'=>$data2['data']]);
             } else {
@@ -77,9 +80,10 @@ class ShopController extends Controller
                 'Accept' => 'application\json',
                 'Authorization' => 'Bearer '.$token
             ];
-            // dd($headers);
 
-            $user_id = $request->user_id;
+            $user = $user = GetUserInfo::getUserInfo();
+
+            $user_id = $user['data']['id'];
 
             $api_request = [
                 'user_id' => $user_id,
@@ -87,7 +91,6 @@ class ShopController extends Controller
 
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/shop/byUser', $api_request);
             $data = $response->json();
-            // dd($data);
 
 
             if ($data['status'] == 'success') {
@@ -128,7 +131,8 @@ class ShopController extends Controller
             // dd($data);
             if ($data['status'] == 'success') {
                 toastr()->success('Shop added succesfully', 'Shop');
-                return redirect('/index');
+                // return redirect('/index');
+                return redirect('/shop/byUser');
 
             } else {
                 toastr()->error('Failed to add shop', 'Shop');
@@ -169,7 +173,9 @@ class ShopController extends Controller
             // dd($data);
             if ($data['status'] == 'success') {
                 toastr()->success('Shop edit succesfully', 'Shop');
-                return redirect('/index');
+                // return redirect('/index');
+                return redirect('/shop/byUser');
+
 
             } else {
                 toastr()->error('Failed to edit shop', 'Shop');

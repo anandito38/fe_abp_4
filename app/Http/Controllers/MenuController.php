@@ -144,10 +144,10 @@ class MenuController extends Controller
             // dd($data);
             if ($data['status'] == 'success') {
                 toastr()->success('Menu added succesfully', 'Menu');
-                return redirect('/index');
+                return redirect('/shop/byUser');
             } else {
                 toastr()->error('Failed to add menu', 'Menu');
-                return redirect('/index');
+                return redirect('/shop/byUser');
             }
 
         }catch(Exception $error){
@@ -189,7 +189,7 @@ class MenuController extends Controller
 
             } else {
                 toastr()->error('Failed to edit menu', 'Menu');
-                return redirect('/index');
+                return redirect('/shop/byUser');
             }
 
         }catch(Exception $error){
@@ -222,10 +222,10 @@ class MenuController extends Controller
             // dd($data);
             if ($data['status'] == 'success') {
                 toastr()->success('Menu deleted succesfully', 'Menu');
-                return redirect('/index');
+                return redirect('/shop/byUser');
             } else {
                 toastr()->error('Menu deleted unsuccesful', 'Menu');
-                return redirect('/index');
+                return redirect('/shop/byUser');
             }
             
 

@@ -43,8 +43,11 @@
                                   
                                 </form>
                             @elseif (isset($userAuth['role']) && $userAuth['role'] == 'Buyer') 
-                                <a class="dropdown-item" href="/booking/detail/menu/{{ $bookingId }}">Cart</a>
-                              
+                                <form action="/booking/detail/menu" method="GET">
+                                      <button class="dropdown-item" type="submit" style="margin-left:25px" >
+                                          Cart
+                                      </button>
+                                </form>
                             @endif
                         </div>
                     </div>

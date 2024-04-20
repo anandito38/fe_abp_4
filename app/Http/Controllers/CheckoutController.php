@@ -55,8 +55,8 @@ class CheckoutController extends Controller
         }
     }
 
-    public function showCart($bookingId){
-        $bookingId = intval($bookingId);
+    public function showCart(Request $request){
+        // $bookingId = intval($bookingId);
         // dd($bookingId);
         try{
             
@@ -66,13 +66,23 @@ class CheckoutController extends Controller
                 'Authorization' => 'Bearer '.$token
             ];
             // 
-            $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/'.$bookingId);
+            
+            $user = $user = GetUserInfo::getUserInfo();
+            
+            $api_request2 = [
+                'user_id' => $user['data']['id']
+            ];
+            $response2 = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/prog/byUser', $api_request2 );
+            $data2 = $response2->json();
+            // dd($data2);
+            
+            $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/'.$data2['data'][0]['id']);
             $data = $response->json();
-            // dd($bookingId);
+            // dd($data);
 
 
             if ($data['status'] == 'success') {
-                return view('bookings.cart', ['carts' => $data['data']['Checkout'], 'bookingId' => $bookingId]);
+                return view('bookings.cart', ['carts' => $data['data']['Checkout'], 'bookingId' => $data2['data'][0]['id']]);
             } else {
                 return redirect('/index');
             }
@@ -111,10 +121,10 @@ class CheckoutController extends Controller
             // dd($data);
             if ($data['status'] == 'success') {
                 toastr()->success('Menu deleted succesfully', 'Cart');
-                return redirect('/index');
+                return redirect('/booking/detail/menu');
             } else {
                 toastr()->error('Menu deleted unsuccesful', 'Cart');
-                return redirect('/index');
+                return redirect('/booking/detail/menu');
             }
             
 

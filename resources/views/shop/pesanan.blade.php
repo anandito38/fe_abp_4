@@ -58,9 +58,9 @@
                           </div>
                         </td>
                       </tr>
-                      @endif
-                      @endforeach
-                      @endif
+                @endif
+            @endforeach
+            @endif
           </tbody>
         </table>
         @else
@@ -93,7 +93,7 @@
             @csrf
             @method('post')
             
-            <input type="text" name="menu_id" id="menu_id" value="{{ $menu['menu']['id'] }}">
+            <input type="hidden" name="menu_id" id="menu_id" value="{{ $menu['menu']['id'] }}">
             <input type="hidden" name="shop_id" id="shop_id" value="{{ $menu['menu']['shop_id'] }}">
             <input type="hidden" name="booking_id" id="booking_id" value="{{ $menu['booking']['id'] }}">
             <!--Footer-->

@@ -48,7 +48,7 @@
       <div class="row" id="shopList">
 
         @foreach ($shops as $shop)
-          <div class="col-sm-6 col-md-4 mx-auto shop-item" data-name="{{ strtolower($shop['namaToko']) }}">
+          <div class="col-sm-6 col-md-4 mx-auto shop-item" data-name="{{ $shop['namaToko'] }}">
             <div class="box">
               <form action="/menu/byShop" method="POST">
                 @csrf

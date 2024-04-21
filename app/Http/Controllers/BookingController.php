@@ -31,12 +31,12 @@ class BookingController extends Controller
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/invoice/add', $api_request);
             $data = $response->json();
-            dd($data, $api_request);
+            // dd($data, $api_request);
             if ($data['status'] == 'success') {
-                toastr()->success('Shop added succesfully', 'Shop');
+                toastr()->success('Payment succesfully', 'Cart');
                 return redirect('/index');
             } else {
-                toastr()->error('Failed to add shop', 'Shop');
+                toastr()->error('Payment unsuccesful', 'Cart');
                 return redirect('/index');
             }
             

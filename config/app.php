@@ -168,7 +168,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -184,7 +183,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'Flash' => Laracasts\Flash\Flash::class,
     ])->toArray(),
 
 ];

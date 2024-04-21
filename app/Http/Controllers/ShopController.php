@@ -9,8 +9,7 @@ use App\Utils\GetUserInfo;
 
 class ShopController extends Controller
 {
-    public function getAllShop()
-    {
+    public function getAllShop(){
         try{
             // $token = $_COOKIE['token'];
 
@@ -266,8 +265,7 @@ class ShopController extends Controller
 
     }
 
-    public function donePaidedMenuByShop(Request $request)
-    {
+    public function donePaidedMenuByShop(Request $request){
         try{
             $token = $_COOKIE['token'];
 

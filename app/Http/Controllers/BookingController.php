@@ -20,10 +20,12 @@ class BookingController extends Controller
             // dd($headers);
 
             $booking_id = $request->booking_id;
+            $user = $user = GetUserInfo::getUserInfo();
 
             $api_request = [
                 'metodePembayaran' => "QRIS",
                 'booking_id' => $booking_id,
+                'user_id' => $user['data']['id']
 
             ];
 

@@ -57,7 +57,7 @@
                   {{ $menu['stokMenu'] }}
                 </h6>
                 
-                <button class="btn btn-danger " data-toggle="modal" data-target="#modalConfirmDelete" data-menu-id="{{ $menu['id'] }}">
+                <button class="btn" style="border: 2px solid red; background-color: transparent; color: red;" data-toggle="modal" data-target="#modalConfirmDelete" data-menu-id="{{ $menu['id'] }}">
                     Delete
                 </button>
                 
@@ -153,8 +153,8 @@
               <!--Footer-->
               <div class="modal-footer flex-center">
                 {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
-                <button type="submit" class="btn btn-success">Submit</button>
-                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
+                <button type="submit" class="btn" style="border: 2px solid green; background-color: transparent; color: green;">Submit</button>
+                <a type="button" class="btn waves-effect" style="border: 2px solid red; background-color: transparent; color: red;"data-dismiss="modal">Cancel</a> 
               </div>
             </form>
           </div>

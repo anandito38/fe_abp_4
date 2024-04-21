@@ -38,21 +38,29 @@
           @foreach ($shops as $shop)
           <div class="col-sm-6 col-md-4 mx-auto">
             <div class="box">
-              <form action="/shop/byUser/menu" method="GET" class="d-inline-block mr-2">
+              
+              <div class="img-box">
+                <a data-toggle="modal" data-target="#modalEditShop" data-nama-toko="{{ $shop['namaToko'] }}" data-nomor-toko="{{ $shop['nomorToko'] }}" data-lokasi-toko="{{ $shop['lokasiToko'] }}"  data-id-toko="{{ $shop['id'] }}">
+                  <img src="{{ asset($shop['image']) }}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                </a>
+              </div>
+
+              {{-- form pergi ke menu toko --}}
+              <form action="/shop/byUser/menu" method="GET" class="d-inline-block mr-2 mt-3">
                 @csrf
-                <div class="img-box">
-                    <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
-                    <input type="hidden" name="shop_name" value="{{ $shop['namaToko'] }}">
-                    <a data-toggle="modal" data-target="#modalEditShop" data-nama-toko="{{ $shop['namaToko'] }}" data-nomor-toko="{{ $shop['nomorToko'] }}" data-lokasi-toko="{{ $shop['lokasiToko'] }}"  data-id-toko="{{ $shop['id'] }}">
-                      <img src="{{ asset($shop['image']) }}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                    </a>
-                    <div class="detail-box">
-                        <button type="submit" class="btn btn-primary">Go!</button>
-                    </div>
-                </div>
+                <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
+                <button type="submit" class="btn" style="border: 2px solid black; background-color: transparent; color: black;">Menu</button>
               </form>
-            
-              <button type="button" class="btn btn-danger d-inline-block" data-toggle="modal" data-target="#modalConfirmDelete" data-shop-id="{{ $shop['id'] }}">Delete</button>
+              
+              {{-- form pergi ke pesanan toko --}}
+              <form action="/shop/booking/menu" method="GET" class="d-inline-block mr-2">
+                @csrf
+                <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
+                <button type="submit" class="btn" style="border: 2px solid black; background-color: transparent; color: black;">Pesanan</button>
+              </form>
+
+              {{-- button delete toko --}}
+              <button type="button" class="btn d-inline-block" style="border: 2px solid red; background-color: transparent; color: red;" data-toggle="modal" data-target="#modalConfirmDelete" data-shop-id="{{ $shop['id'] }}">Delete</button>
             
                 
               <div class="detail-box">
@@ -136,9 +144,7 @@
               <br>
               <input type="number" class="form-control" placeholder="Nomor gunakan 0 didepan" name="nomorToko" id="oldNomorToko" value="{{ $shop['nomorToko'] }}">
               <br>
-              {{-- <div class="form-group">
-              <input type="text" class="form-control" placeholder="Deskripsi" name="deskripsiMenu" style="height: 100px; padding-bottom: 3rem; overflow-y: auto;">
-              </div> --}}
+              
               <div class="form-group">
                 <textarea class="form-control" rows="3" placeholder="Lokasi" name="lokasiToko" id="oldLokasiToko" value="{{ $shop['lokasiToko'] }}"></textarea>
               </div>
@@ -151,8 +157,8 @@
               <!--Footer-->
               <div class="modal-footer flex-center">
                 {{-- <a href="" class="btn  btn-outline-danger">Yes</a> --}}
-                <button type="submit" class="btn btn-success">Submit</button>
-                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Cancel</a>
+                <button type="submit" class="btn" style="border: 2px solid green; background-color: transparent; color: green;">Submit</button>
+                <a type="button" class="btn waves-effect" style="border: 2px solid red; background-color: transparent; color: red;"data-dismiss="modal">Cancel</a>
               </div>
             </form>
           </div>

@@ -46,15 +46,9 @@ class ShopController extends Controller
             $api_request = [
                 'shop_id' => $shop_id,
             ];
-
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/byShop', $api_request);
             $data = $response->json();
             // dd($data['data']);
-
-            
-
-
-
             if (isset($data)) {
                 if ($data['status'] == 'success') {
                     return view('shop.myShopMenu', ['menus'=>$data['data'], 'shop_id' => $shop_id, 'shop_name' => $shop_name]);
@@ -203,8 +197,6 @@ class ShopController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
-
-    
     
     public function deleteShop(Request $request){
         try{
@@ -243,5 +235,72 @@ class ShopController extends Controller
         }
     }
 
+
+    public function getAllPaidedMenuByShop(Request $request){
+        try{
+            $token = $_COOKIE['token'];
+
+                $headers = [
+                    'Accept' => 'application\json',
+                    'Authorization' => 'Bearer '.$token
+                ];
+
+                $shop_id = $request->shop_id;
+
+                $api_request = [
+                    'shop_id' => $shop_id
+                ];
+                // dd($api_request);
+                $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all/paid/byShop', $api_request);
+                $data = $response->json();
+                // dd($data);
+
+                if ($data['status'] == 'success') {
+                    return view('shop.pesanan',['menus'=>$data['data']]);
+                } else {
+                    return view('errors.404');
+                }
+            }catch(Exception $error){
+                return "Error: ".$error->getMessage();
+            }
+
+    }
+
+    public function donePaidedMenuByShop(Request $request)
+    {
+        try{
+            $token = $_COOKIE['token'];
+
+                $headers = [
+                    'Accept' => 'application\json',
+                    'Authorization' => 'Bearer '.$token
+                ];
+
+                $shop_id = $request->shop_id;
+                $menu_id = $request->menu_id;
+                $booking_id = $request->booking_id;
+
+                $api_request = [
+                    'shop_id' => $shop_id,
+                    'menu_id' => $menu_id,
+                    'booking_id' => $booking_id,
+
+                ];
+                // dd($api_request);
+                $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/menu/done/paid/byShop', $api_request);
+                $data = $response->json();
+                // dd($data);
+
+                if ($data['status'] == 'success') {
+                    toastr()->success('Pesanan selesai', 'Shop');
+                    return redirect('/shop/byUser');
+                } else {
+                    return view('errors.404');
+                }
+            }catch(Exception $error){
+                return "Error: ".$error->getMessage();
+            }
+
+    }
     
 }

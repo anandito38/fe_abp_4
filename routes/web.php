@@ -61,14 +61,17 @@ Route::controller(ShopController::class)->group(function(){
     Route::post('/shop/add', 'addShop');
     Route::post('/shop/edit', 'editShop');
     Route::post('/shop/delete', 'deleteShop');
+    Route::get('/shop/booking/menu', 'getAllPaidedMenuByShop');
+    Route::post('/menu/done/paid/byShop', 'donePaidedMenuByShop');
+
 });
 
 Route::controller(BookingController::class)->group(function(){
     Route::post('/invoice/add', 'addInvoice');
-    // Route::post('/shop/byUser', 'getShopByUserId');
     // Route::post('/shop/byUser/menu', 'getShopMenuByUserId');
     // Route::post('/shop/add', 'addShop');
     // Route::post('/shop/edit', 'editShop');
+    
 });
 
 Route::controller(CheckoutController::class)->group(function(){

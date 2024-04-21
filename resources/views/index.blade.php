@@ -207,13 +207,13 @@
                   @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
                     <a data-toggle="modal" data-target="#modalAddCart" data-booking-id="{{ $bookingId }}" data-menu-id="{{ $menu['id'] }}" data-menu-stok="{{ $menu['stokMenu'] }}">
                       <div class="img-box">
-                        <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                        <img src="{{ asset($menu['imageMenu']) }}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                         {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
                       </div>
                     </a>
                   @else
                     <div class="img-box">
-                      <img src="" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                      <img src="{{ asset($menu['imageMenu']) }}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                       {{-- <img src="{{ asset('images/n.jpg')}}" class="box-img" alt="gambar menu" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
                     </div>
                   @endif

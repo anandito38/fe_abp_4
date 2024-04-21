@@ -38,7 +38,7 @@
               
                 <div class="img-box">
                   <a data-toggle="modal" data-target="#modalEditMenu" data-nama-menu="{{ $menu['namaMenu'] }}" data-harga-menu="{{ $menu['hargaMenu'] }}" data-deskripsi-menu="{{ $menu['deskripsiMenu'] }}" data-id-menu="{{ $menu['id'] }}">
-                    <img src="" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                    <img src="{{ asset($menu['imageMenu']) }}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                     {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
                   </a>
                 </div>
@@ -130,7 +130,7 @@
           <!--Modal Body-->
           <div class="modal-body">
             {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
-            <form id="EditShopForm" action="/menu/edit" method="POST">
+            <form id="EditShopForm" action="/menu/edit" method="POST" enctype="multipart/form-data">
               @csrf
               @method('post')
               <input type="text" class="form-control" placeholder="Nama" name="namaMenu" id="oldNamaMenu" value="{{ $menu['namaMenu'] }}">
@@ -139,6 +139,9 @@
               <br>
               <div class="form-group">
                 <textarea class="form-control" rows="3" placeholder="Deskripsi" name="deskripsiMenu" id="oldDeskripsiMenu" value="{{ $menu['deskripsiMenu'] }}"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1" >
               </div>
               
               <label for="stokMenu">Tambah Stok</label>

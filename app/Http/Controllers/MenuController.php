@@ -38,7 +38,7 @@ class MenuController extends Controller
                 $response3 = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/prog/byUser', $api_request );
                 $data3 = $response3->json();
                 
-                // dd($data2);
+                // dd($data['data']);
                 // dd($user);
                 if ($data['status'] == 'success') {
                     if (isset($_COOKIE['token'])){
@@ -93,6 +93,7 @@ class MenuController extends Controller
             ];
             $response2 = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/prog/byUser', $api_request2 );
             $data2 = $response2->json();
+            // dd($data2);
             
             if ($data['status'] == 'success') {
                 if (isset($_COOKIE['token'])){
@@ -171,6 +172,22 @@ class MenuController extends Controller
             $stokMenu = $request->stokMenu;
             $deskripsiMenu = $request->deskripsiMenu;
 
+            if(isset($request->image)){
+                $destination_path = 'public/images/menu';    
+                $image = $request->file('image');
+                $image_name = $id.'_'.time().'_'.$image->getClientOriginalName();
+                // $image->move(public_path('images'), $image_name);
+                $path = $request->file('image')->storeAs($destination_path, $image_name);
+                $path2 = 'storage/images/menu/'.$image_name;
+                // dd($id);
+                $api_request2 = [
+                    'id' => $id,
+                    'image' => $path2,
+                ];
+                $response2 = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/menu/add/image', $api_request2);
+                $data2 = $response2->json();
+                // dd($data2, $response2, $api_request2);
+            }
             $api_request = [
                 'id' => $id,
                 'namaMenu' => $namaMenu,

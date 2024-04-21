@@ -64,7 +64,7 @@ Route::controller(ShopController::class)->group(function(){
 });
 
 Route::controller(BookingController::class)->group(function(){
-    // Route::get('/shop/all', 'getAllShop');
+    Route::post('/invoice/add', 'addInvoice');
     // Route::post('/shop/byUser', 'getShopByUserId');
     // Route::post('/shop/byUser/menu', 'getShopMenuByUserId');
     // Route::post('/shop/add', 'addShop');

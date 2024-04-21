@@ -19,7 +19,11 @@
 
       @if (isset($carts) && count($carts) > 0)
         <div class="table-responsive" style="padding-left: 4rem; padding-right: 4rem;">
-          <a href="#" class="btn btn-primary" style="margin-top: 2rem">Checkout</a>
+          <form action="/invoice/add" method="POST">
+            @csrf
+            <input type="hidden" name="booking_id" value="{{ $bookingId }}">
+            <button type="submit" class="btn btn-primary" style="margin-top: 2rem">Checkout {{ $bookingId }} </button>
+          </form>
           <table class="table table-bordered table-striped" style="margin-top: 2rem; margin-left: auto; margin-right: auto;">
               <thead>
                   <tr>

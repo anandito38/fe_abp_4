@@ -180,6 +180,7 @@ class AuthController extends Controller
 
             $data = $response->json();
             $data2 = $response2->json();
+            // dd($data2['data']);
             $api_request = [
                 'user_id' => $user['data']['id']
             ];

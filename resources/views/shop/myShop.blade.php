@@ -44,7 +44,7 @@
                     <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
                     <input type="hidden" name="shop_name" value="{{ $shop['namaToko'] }}">
                     <a data-toggle="modal" data-target="#modalEditShop" data-nama-toko="{{ $shop['namaToko'] }}" data-nomor-toko="{{ $shop['nomorToko'] }}" data-lokasi-toko="{{ $shop['lokasiToko'] }}"  data-id-toko="{{ $shop['id'] }}">
-                        <img src="" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                      <img src="{{ asset($shop['image']) }}" class="box-img" alt="gambar shop" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                     </a>
                     <div class="detail-box">
                         <button type="submit" class="btn btn-primary">Go!</button>

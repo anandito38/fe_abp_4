@@ -9,7 +9,7 @@ use App\Utils\GetUserInfo;
 
 class BookingController extends Controller
 {
-    public function addBooking(Request $request){
+    public function addInvoice(Request $request){
         try{
             
             $token = $_COOKIE['token'];
@@ -19,23 +19,17 @@ class BookingController extends Controller
             ];
             // dd($headers);
 
-            $namaToko = $request->namaToko;
-            $nomorToko = $request->nomorToko;
-            $lokasiToko = $request->lokasiToko;
-            $user_id = $request->user_id;
+            $booking_id = $request->booking_id;
 
             $api_request = [
-                'namaToko' => $namaToko,
-                'nomorToko' => $nomorToko,
-                'lokasiToko' => $lokasiToko,
-                'user_id' => $user_id,
+                'metodePembayaran' => "QRIS",
+                'booking_id' => $booking_id,
+
             ];
 
-            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/shop/add', $api_request);
+            $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/invoice/add', $api_request);
             $data = $response->json();
-
-
-            // dd($data);
+            dd($data, $api_request);
             if ($data['status'] == 'success') {
                 toastr()->success('Shop added succesfully', 'Shop');
                 return redirect('/index');

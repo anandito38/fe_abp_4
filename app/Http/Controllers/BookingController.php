@@ -45,4 +45,66 @@ class BookingController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
+    
+    public function showBooking(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            // 
+            
+            $user = $user = GetUserInfo::getUserInfo();
+            // dd($user);
+            
+            $api_request = [
+                'user_id' => $user['data']['id']
+            ];
+            $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/invoice/all/byUser', $api_request );
+            $data = $response->json();
+            // dd($data['data'][0],$user);
+            
+            if ($data['status'] == 'success') {
+                return view('bookings.pesananUser', ['invoices' => $data['data']]);
+            } else {
+                return redirect('/index');
+            }
+            
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
+    public function showBookingMenu(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            
+            $invoice_id = $request->invoice_id;
+            
+            $api_request = [
+                'id' => $invoice_id
+            ];
+            $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all/paid/byInvoice', $api_request );
+            $data = $response->json();
+            // dd($data['data']);
+            
+            if ($data['status'] == 'success') {
+                return view('bookings.pesananMenu', ['menus' => $data['data']]);
+            } else {
+                return redirect('/index');
+            }
+            
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
 }

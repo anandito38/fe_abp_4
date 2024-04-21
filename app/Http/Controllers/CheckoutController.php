@@ -133,4 +133,48 @@ class CheckoutController extends Controller
         }
     }
 
+    public function editCart(Request $request){
+        try{
+            
+            $token = $_COOKIE['token'];
+            $headers = [
+                'Accept' => 'application\json',
+                'Authorization' => 'Bearer '.$token
+            ];
+            // dd($headers);
+
+            $bookingId = $request->bookingId;
+            $menuId = $request->menuId;
+            $quantity = $request->quantity;
+            $stokMenu = $request->stokMenu;
+
+            if ($quantity > $stokMenu) {
+                toastr()->error('Quantity is more than stock', 'Shop');
+                return redirect('/booking/detail/menu');
+            }else{
+                $api_request = [
+                    'bookingId' => $bookingId,
+                    'menuId' => $menuId,
+                    'quantity' => $quantity,
+                ];
+    
+                $response = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/booking/detail/menu/edit', $api_request);
+                $data = $response->json();
+                // dd($data);
+                if ($data['status'] == 'success') {
+                    toastr()->success('Menu edited succesfully', 'Menu');
+                    // return redirect('/index');
+                    return redirect('/booking/detail/menu');
+    
+                } else {
+                    toastr()->error('Failed to edit menu', 'Menu');
+                    return redirect('/booking/detail/menu');
+                }
+            }
+
+        }catch(Exception $error){
+            return "Error: ".$error->getMessage();
+        }
+    }
+
 }

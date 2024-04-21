@@ -159,6 +159,23 @@ class ShopController extends Controller
             $nomorToko = $request->nomorToko;
             $lokasiToko = $request->lokasiToko;
             $user_id = $request->user_id;
+            if(isset($request->image)){
+                // dd($headers);
+                $destination_path = 'public/images/shop';    
+                $image = $request->file('image');
+                // dd($image);
+                $image_name = $id.'_'.time().'_'.$image->getClientOriginalName();
+                // $image->move(public_path('images'), $image_name);
+                $path = $request->file('image')->storeAs($destination_path, $image_name);
+                dd($id);
+                $api_request2 = [
+                    'id' => $id,
+                    'image' => $path,
+                ];
+                $response2 = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/shop/add/image', $api_request2);
+                $data2 = $response2->json();
+                dd($data2);
+            }
 
             $api_request = [
                 'id' => $id,
@@ -225,4 +242,6 @@ class ShopController extends Controller
             return "Error: ".$error->getMessage();
         }
     }
+
+    
 }

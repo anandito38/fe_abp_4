@@ -129,7 +129,7 @@
           <!--Modal Body-->
           <div class="modal-body">
             {{-- <p style="font-family: Verdana, Geneva, Tahoma, sans-serif">Masukkan Jumlah</p> --}}
-            <form id="EditShopForm" action="/shop/edit" method="POST">
+            <form id="EditShopForm" action="/shop/edit" method="POST" enctype="multipart/form-data">
               @csrf
               @method('post')
               <input type="text" class="form-control" placeholder="Nama" name="namaToko" id="oldNamaToko" value="{{ $shop['namaToko'] }}">
@@ -142,9 +142,11 @@
               <div class="form-group">
                 <textarea class="form-control" rows="3" placeholder="Lokasi" name="lokasiToko" id="oldLokasiToko" value="{{ $shop['lokasiToko'] }}"></textarea>
               </div>
+              <div class="form-group">
+                <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1" >
+              </div>
               <input type="hidden" name="user_id" value="{{ $user_id }}">
               <input type="hidden" name="id" id="idToko" value="{{ $shop['id'] }}">            
-              
               
               <!--Footer-->
               <div class="modal-footer flex-center">

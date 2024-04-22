@@ -46,14 +46,14 @@
               </div>
 
               {{-- form pergi ke menu toko --}}
-              <form action="/shop/byUser/menu" method="GET" class="d-inline-block mr-2 mt-3">
+              <form action="/shop/byUser/menu" method="POST" class="d-inline-block mr-2 mt-3">
                 @csrf
                 <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
                 <button type="submit" class="btn" style="border: 2px solid black; background-color: transparent; color: black;">Menu</button>
               </form>
               
               {{-- form pergi ke pesanan toko --}}
-              <form action="/shop/booking/menu" method="GET" class="d-inline-block mr-2">
+              <form action="/shop/booking/menu" method="POST" class="d-inline-block mr-2">
                 @csrf
                 <input type="hidden" name="shop_id" value="{{ $shop['id'] }}">
                 <button type="submit" class="btn" style="border: 2px solid black; background-color: transparent; color: black;">Pesanan</button>

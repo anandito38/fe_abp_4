@@ -57,11 +57,11 @@ Route::controller(MenuController::class)->group(function(){
 Route::controller(ShopController::class)->group(function(){
     Route::get('/shop/all', 'getAllShop');
     Route::get('/shop/byUser', 'getShopByUserId');
-    Route::get('/shop/byUser/menu', 'getShopMenuByUserId');
+    Route::post('/shop/byUser/menu', 'getShopMenuByUserId');
     Route::post('/shop/add', 'addShop');
     Route::post('/shop/edit', 'editShop');
     Route::post('/shop/delete', 'deleteShop');
-    Route::get('/shop/booking/menu', 'getAllPaidedMenuByShop');
+    Route::post('/shop/booking/menu', 'getAllPaidedMenuByShop');
     Route::post('/menu/done/paid/byShop', 'donePaidedMenuByShop');
 
 });

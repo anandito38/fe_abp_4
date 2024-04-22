@@ -33,9 +33,9 @@
         <table class="table table-bordered table-striped" style="margin-top: 2rem; margin-left: auto; margin-right: auto;">
           <thead>
             <tr>
-              <th>Nama Menu</th>
-              <th class="col-auto" >Jumlah</th>
-                  <th class="col-auto" style="width: 15rem">Aksi</th>
+              <th class="col-auto" style="width: 15rem">Nama Menu</th>
+              <th class="col-auto" style="width: 15rem">Jumlah</th>
+                  <th class="col-auto" style="width: 5rem">Aksi</th>
                 </tr>
           </thead>
           <tbody>
@@ -43,7 +43,7 @@
             @foreach ($menus as $menu)
                 @if($menu['quantity'][0]['statusMasak'] != 'Selesai')
                   <tr>
-                    <td>{{ $menu['menu']['id'] }}{{ $menu['menu']['namaMenu'] }}</td>
+                    <td> {{ $menu['menu']['namaMenu'] }}</td>
                     <td>{{ $menu['quantity'][0]['banyakPesanan' ] }}</td>
                       {{-- <td>{{ $menu['quantity'] }}</td> --}}
                       <td class="col-auto">

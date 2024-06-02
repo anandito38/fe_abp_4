@@ -13,7 +13,7 @@
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
         <h2>
-          Menu Kantin 
+          Menu Kantin {{$bookingId}}
         </h2>
       </div>
       <div>

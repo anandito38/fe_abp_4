@@ -8,6 +8,10 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CheckoutController;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+
 
 
 /*
@@ -27,6 +31,22 @@ use App\Http\Controllers\CheckoutController;
 // Route::get('/menu', function () {
 //     return view('menus');
 // });
+
+Route::get('storage/images/menu/{filename}', function ($filename) {
+    $path = storage_path('app/public/images/menu/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
 
 Route::get('/', function () {
     return redirect('/index');

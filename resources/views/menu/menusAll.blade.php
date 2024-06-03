@@ -23,18 +23,9 @@
             <div class="col-12 col-md-10 col-lg-6">
               <form class="card card-sm">
                 <div class="card-body row no-gutters align-items-center">
-                  {{-- <div class="col-auto">
-                    <i class="fas fa-search h4 text-body"></i>
-                  </div> --}}
-                  <!--end of col-->
                   <div class="col">
                     <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Nama Menu atau Toko" style="text-align: center;" oninput="searchMenu(this.value)">
                   </div>
-                  <!--end of col-->
-                  {{-- <div class="col-auto">
-                    <button class="btn btn-lg btn-success" type="submit">Search</button>
-                  </div> --}}
-                  <!--end of col-->
                 </div>
               </form>
             </div>
@@ -47,19 +38,20 @@
           @if ($menu['stokMenu'] != 0)
             <div class="col-sm-6 col-md-4 mx-auto menu-item"> <!-- Tambahkan kelas menu-item -->
               <div class="box">
-                @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
-                  <a data-toggle="modal" data-target="#modalAddCart" data-booking-id="{{ $bookingId }}" data-menu-id="{{ $menu['id'] }}" data-menu-stok="{{ $menu['stokMenu'] }}">
+                  @if (isset($userAuth['role']) && $userAuth['role'] == 'Buyer')
+                    <a data-toggle="modal" data-target="#modalAddCart" data-booking-id="{{ $bookingId }}" data-menu-id="{{ $menu['id'] }}" data-menu-stok="{{ $menu['stokMenu'] }}">
+                      <div class="img-box">
+                        <img src="{{ asset($menu['imageMenu']) }}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
+                        {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
+                      </div>
+                    </a>
+                  @else
                     <div class="img-box">
                       <img src="{{ asset($menu['imageMenu']) }}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
                       {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
                     </div>
-                  </a>
-                @else
-                  <div class="img-box">
-                    <img src="{{ asset($menu['imageMenu']) }}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';">
-                    {{-- <img src="{{ asset('images/n1.jpg')}}" class="box-img" alt="" onerror="this.onerror=null; this.src='https://fivestar.sirv.com/example.jpg?profile=Example';"> --}}
-                  </div>
-                @endif
+                  @endif
+                
                 <div class="detail-box">
                   <h4>
                     {{ $menu['namaMenu'] }}.
@@ -103,7 +95,9 @@
             @method('post')
             <input type="number" class="form-control" id="stokMenu" placeholder="Sisa Stok: {{ $menu['stokMenu'] }}" name="quantity">
             <br>
-            <input type="hidden" name="bookingId" id="idBooking" value="{{ $bookingId }}">
+            @if(isset($bookingId))
+              <input type="hidden" name="bookingId" id="idBooking" value="{{ $bookingId }}">
+            @endif
             <input type="hidden" name="menuId" id="idMenu" value="{{ $menu['id'] }}">
             <input type="hidden" name="stokMenu2" id="stokMenu" value="{{ $menu['stokMenu'] }}">
 

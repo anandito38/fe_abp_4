@@ -80,7 +80,9 @@
             @method('post')
             <input type="number" class="form-control" id="stokMenu" placeholder="Sisa Stok: {{ $menu['stokMenu'] }}" name="quantity">
             <br>
-            <input type="hidden" name="bookingId" id="idBooking" value="{{ $bookingId }}">
+            @if(isset($bookingId))
+              <input type="hidden" name="bookingId" id="idBooking" value="{{ $bookingId }}">
+            @endif
             <input type="hidden" name="menuId" id="idMenu" value="{{ $menu['id'] }}">
             <input type="hidden" name="stokMenu" id="stokMenu2  " value="{{ $menu['stokMenu'] }}">
 

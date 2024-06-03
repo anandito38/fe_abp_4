@@ -8,7 +8,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container">
               <a class="navbar-brand" href="#">
                 <img class="img-nav" src="{{ asset('images/logo.png') }}" alt="logo" height="70">
-                <span style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif; letter-spacing: 2px;">
+                <span style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif; letter-spacing: 2px;margin-left: 10px">
                   Telyu Canteen
               </span>
               </a>
@@ -302,7 +302,7 @@
     </div>
   </section>
 
-<!-- Modal -->
+<!-- Modal add cart -->
 @if (isset($menus) && !empty($menus))
   <div class="modal fade" id="modalAddCart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">

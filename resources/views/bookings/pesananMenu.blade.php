@@ -19,7 +19,7 @@
 
       @if (isset($menus) && count($menus) > 0)
         <div class="table-responsive" style="padding-left: 4rem; padding-right: 4rem;">
-          <table class="table table-bordered table-striped" style="margin-top: 2rem; margin-left: auto; margin-right: auto;">
+          <table class="table table-bordered table-striped" style=";margin-top: 2rem; margin-left: auto; margin-right: auto;">
               <thead>
                   <tr>
                       <th class="col-auto">Nama Menu</th>

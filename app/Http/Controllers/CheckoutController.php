@@ -24,7 +24,6 @@ class CheckoutController extends Controller
             $menuId = $request->menuId;
             $quantity = $request->quantity;
             $stokMenu = $request->stokMenu;
-            
             // dd($stokMenu);
             if ($quantity > $stokMenu) {
                 toastr()->error('Quantity is more than stock', 'Shop');
@@ -43,10 +42,10 @@ class CheckoutController extends Controller
     
                 // dd($data);
                 if ($data['status'] == 'success') {
-                    toastr()->success('Menu added succesfully', 'Shop');
+                    toastr()->success('Menu added succesfully', 'Cart');
                     return redirect('/index');
                 } else {
-                    toastr()->error('Please fill the field correctly', 'Shop');
+                    toastr()->error('Please fill the field correctly', 'Cart');
                     return redirect('/index');
                 }
             }

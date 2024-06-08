@@ -14,16 +14,19 @@
   <section class="recipe_section layout_padding-top">
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
-        <h2>Cart</h2>
+        <h2>Keranjang</h2>
       </div>
 
       @if (isset($carts) && count($carts) > 0)
         <div class="table-responsive" style="padding-left: 4rem; padding-right: 4rem;">
-          <form action="/invoice/add" method="POST">
+            <button type="button" class="btn btn" style="border: 2px solid blue; background-color: transparent; color: blue;" data-toggle="modal" data-target="#modalCheckout"  data-id-booking="{{ $bookingId }}" >
+              Checkout
+            </button>
+          {{-- <form action="/invoice/add" method="POST">
             @csrf
             <input type="hidden" name="booking_id" value="{{ $bookingId }}">
             <button type="submit" class="btn btn-primary" style="margin-top: 2rem">Checkout</button>
-          </form>
+          </form> --}}
           <table class="table table-bordered table-striped" style="margin-top: 2rem; margin-left: auto; margin-right: auto;">
               <thead>
                   <tr>
@@ -44,7 +47,7 @@
                           <td class="col-auto">
                               <div class="d-flex">
                                 <a data-toggle="modal" data-target="#modalEditCart" data-id-menu="{{ $cart['Menu']['id'] }}" data-id-booking="{{ $bookingId }}" data-quantity="{{ $cart['quantity'] }}" data-stok="{{ $cart['Menu']['stokMenu'] }}"  >
-                                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEditCart"  data-id-menu="{{ $cart['Menu']['id'] }}" data-id-booking="{{ $bookingId }}" data-quantity="{{ $cart['quantity'] }}" data-stok="{{ $cart['Menu']['stokMenu'] }}">
+                                  <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target="#modalEditCart"  data-id-menu="{{ $cart['Menu']['id'] }}" data-id-booking="{{ $bookingId }}" data-quantity="{{ $cart['quantity'] }}" data-stok="{{ $cart['Menu']['stokMenu'] }}">
                                     Edit
                                   </button>
                                 </a>
@@ -147,6 +150,41 @@
   @endif
   <!-- EndModal -->
 
+  <!-- Modal Checkout -->
+  @if (isset($carts) && !empty($carts))
+    <div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+          <!--Header-->
+          <div class="modal-header d-flex justify-content-center">
+            <h3 class="heading" style="font-family: 'Bodoni Svtytwo SC ITC TT Book', serif;">Checkout</h3>
+          </div>
+          <!--Modal Body-->
+          <div class="modal-body">
+            <form id="Checkout" action="/invoice/add" method="POST">
+              @csrf
+              @method('post')
+              <input type="hidden" name="bookingId" id="bookingId" value="{{ $bookingId }}">
+              <label for="nomorMeja">Nomor Meja</label>
+              <input type="number" name="nomorMeja" placeholder="isi jika Dine in">
+              <br>
+              <label for="waktuAmbil">Waktu Ambil</label>
+              <input type="time" name="waktuAmbil" style="margin-top: 1rem" required>
+              <!--Footer-->
+              <div class="modal-footer flex-center">
+                <button type="submit" class="btn btn-danger">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--/.Content-->
+      </div>
+    </div>
+  @endif
+  <!-- EndModal -->
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <script>
@@ -166,18 +204,29 @@
     });
   </script>
 
-    <script>
-      $(document).ready(function(){
-        $('#modalConfirmDelete').on('show.bs.modal', function (event) {
-          var button = $(event.relatedTarget); // Tombol yang memicu modal
-          var bookingId = button.data('booking-id'); // Ambil nilai nama toko dari atribut data
-          var menuId = button.data('menu-id'); // Ambil nilai id toko dari atribut data
-          var modal = $(this);
-          modal.find('#bookingId').val(bookingId);
-          modal.find('#menuId').val(menuId);
-        });
+  <script>
+    $(document).ready(function(){
+      $('#modalConfirmDelete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Tombol yang memicu modal
+        var bookingId = button.data('booking-id'); // Ambil nilai nama toko dari atribut data
+        var menuId = button.data('menu-id'); // Ambil nilai id toko dari atribut data
+        var modal = $(this);
+        modal.find('#bookingId').val(bookingId);
+        modal.find('#menuId').val(menuId);
       });
-    </script>
+    });
+  </script>
+
+  <script>
+    $(document).ready(function(){
+      $('#modalCheckout').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Tombol yang memicu modal
+        var bookingId = button.data('booking-id'); // Ambil nilai nama toko dari atribut data
+        var modal = $(this);
+        modal.find('#bookingId').val(bookingId);
+      });
+    });
+  </script>
 
 
 <!-- Modal -->

@@ -19,9 +19,29 @@ class BookingController extends Controller
             ];
             // dd($headers);
 
-            $booking_id = $request->booking_id;
+            $booking_id = $request->bookingId;
             $user = $user = GetUserInfo::getUserInfo();
+            $nomorMeja = $request->nomorMeja;
+            $waktuAmbil = $request->waktuAmbil;
+            // dd($nomorMeja,$waktuAmbil);
 
+            if($nomorMeja == null || $nomorMeja == 0){
+                $statusAmbil = "Take Away";
+                $nomorMeja  = 0;
+            }else{
+                $statusAmbil = "Dine in";
+            }
+
+            $api_requestBook = [
+                'id' => $booking_id,
+                'jamAmbil' => $waktuAmbil,
+                'statusAmbil' => $statusAmbil,
+                'nomorMeja' => $nomorMeja,
+            ];
+
+            $responseBook = Http::withHeaders($headers)->put($_ENV['BACKEND_API_ENDPOINT'].'/booking/edit', $api_requestBook);
+            $dataBook = $responseBook->json();
+            // dd($dataBook);
             $api_request = [
                 'metodePembayaran' => "QRIS",
                 'booking_id' => $booking_id,
@@ -64,7 +84,7 @@ class BookingController extends Controller
             ];
             $response = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/invoice/all/byUser', $api_request );
             $data = $response->json();
-            // dd($data['data'][0],$user);
+            // dd($data['data'],$user);
             
             if ($data['status'] == 'success') {
                 return view('bookings.pesananUser', ['invoices' => $data['data']]);

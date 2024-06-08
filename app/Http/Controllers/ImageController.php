@@ -17,9 +17,18 @@ class ImageController extends Controller
     //     }
     // }
 
-    public function getImageByPath(Request $request, $imagePath){
+    public function getImageMenuByPath(Request $request, $imagePath){
         try {
             $filePath = 'storage/images/menu/' . $imagePath;
+            // dd($filePath);
+            return response()->file(public_path($filePath));
+        } catch (\Exception $error) {
+            return response()->json(['error' => $error->getMessage()], 500);
+        }
+    }
+    public function getImageShopByPath(Request $request, $imagePath){
+        try {
+            $filePath = 'storage/images/shop/' . $imagePath;
             // dd($filePath);
             return response()->file(public_path($filePath));
         } catch (\Exception $error) {

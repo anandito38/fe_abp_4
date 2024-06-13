@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Exception;
 use App\Utils\GetUserInfo;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 
 
 class AuthController extends Controller
@@ -18,6 +19,7 @@ class AuthController extends Controller
             $headers = [
                 'Accept' => 'application/json'
             ];
+            
             $fullName = $request->fullName;
             $nickname = $request->nickname;
             $phoneNumber = $request->phoneNumber;
@@ -68,9 +70,22 @@ class AuthController extends Controller
 
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/login', $api_request);
             $data = $response->json();
+            // dd($data);
+
             if ($data['status'] == 'success' && isset($data['data']['data']) && isset($data['data']['data']['role'])) {
-                if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller') {
+                if ($data['data']['data']['role'] == 'Administrator' || $data['data']['data']['role'] == 'Seller' || $data['data']['data']['role'] == 'Buyer') {
                     setcookie('token', $data['data']['data']['token'], time() + 3600, '/', '', false, true);
+
+                    $token = $data['data']['data']['token'];
+                    $headers_auth = [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer '.$token
+                    ];
+
+                    $responseUserInfo = Http::withHeaders($headers_auth)->post($_ENV['BACKEND_API_ENDPOINT'].'/user/info');
+                    $getUserInfo = $responseUserInfo->json();
+                    
+                    Session::put('userInfo', $getUserInfo);
                     toastr()->success('Login successfully!', 'Authentication');
                     return redirect('/index');
                 } else {
@@ -105,6 +120,8 @@ class AuthController extends Controller
 
             if ($data['status'] == 'success') {
                 setcookie('token', '', time() - 3600, '/', '', false, true);
+                Session::forget('userInfo');
+                Session::flush();
                 toastr()->info('Logout successfully!', 'Authentication');
                 return redirect('/index');
             } else {
@@ -123,8 +140,25 @@ class AuthController extends Controller
     }
 
     public function AuthDashboard(){
+        // dd($_COOKIE);
         if (!isset($_COOKIE['token'])) {
-            return view('index');
+            $headers2 = [
+                'Accept' => 'application/json',
+            ];
+            try {
+    
+    
+                $response2 = Http::withHeaders($headers2)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all');
+                $data2 = $response2->json();
+    
+                if ($data2['status'] == 'success') {
+                    return view('index', ['menus'=>$data2['data'], 'bookingId'=> null]);
+                } else {
+                    return view('index');
+                }
+            } catch (Exception $e) {
+                return view('index')->with('error', 'Terjadi kesalahan saat mengakses server. Silakan coba lagi nanti.');
+            }
         }
 
         $token = $_COOKIE['token'];
@@ -133,15 +167,38 @@ class AuthController extends Controller
             'Accept' => 'application/json',
             'Authorization' => 'Bearer '.$token
         ];
+        $headers2 = [
+            'Accept' => 'application/json',
+        ];
 
         try {
             $response = Http::withHeaders($headers)->post($_ENV['BACKEND_API_ENDPOINT'].'/token/test');
             $user = $user = GetUserInfo::getUserInfo();
 
+
+            $response2 = Http::withHeaders($headers2)->get($_ENV['BACKEND_API_ENDPOINT'].'/menu/all');
+
             $data = $response->json();
+            $data2 = $response2->json();
+            // dd($data2['data']);
+            $api_request = [
+                'user_id' => $user['data']['id']
+            ];
+            $response3 = Http::withHeaders($headers)->get($_ENV['BACKEND_API_ENDPOINT'].'/booking/prog/byUser', $api_request );
+            $data3 = $response3->json();
+            // dd($data3['data'][0]['id']);
+
+
 
             if ($data['status'] == 'success') {
-                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data']]);
+                if (isset($data3['data'][0]['id'])) {
+                    $bookingId = $data3['data'][0]['id'];
+                } else {
+                    $bookingId = null;
+                }
+
+                
+                return view('index', ['cekLogin' => $data, 'userAuth' => $user['data'], 'menus' => $data2['data'], 'bookingId' => $bookingId, 'userId' => $user['data']['id']]);
             } else {
                 return view('index');
             }
@@ -149,5 +206,4 @@ class AuthController extends Controller
             return view('index')->with('error', 'Terjadi kesalahan saat mengakses server. Silakan coba lagi nanti.');
         }
     }
-    
 }

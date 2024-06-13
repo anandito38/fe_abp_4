@@ -6,9 +6,9 @@
 body {
   font-family: "Poppins", sans-serif;
   color: #0c0c0c;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   overflow-x: hidden;
-  background-image: url(../images/body-bg.jpg);
+  background-image: url(../images/body-bg.jpg) !important;
   background-size: cover;
 }
 
@@ -293,7 +293,7 @@ a:focus {
   padding-top: 45px;
   padding-bottom: 425px;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 120px;
   margin-top: -40px;
 }
 
@@ -322,7 +322,7 @@ a:focus {
 }
 
 .slider_section .detail-box h1 span {
-  color: #4855fe;
+  color: #861c1e;
 }
 
 .slider_section .find_container .form-row {
@@ -445,7 +445,7 @@ a:focus {
 
 .slider_section .slider_container .slick-prev:hover,
 .slider_section .slider_container .slick-next:hover {
-  background-color: #4855fe;
+  background-color: #861c1e ;
   color: #ffffff;
 }
 
@@ -636,7 +636,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #4855fe;
+  background-color: #861c1e;
   border-radius: 100%;
   font-size: 12px;
   color: #ffffff;
@@ -673,7 +673,7 @@ a:focus {
   width: 45px;
   height: 45px;
   line-height: 45px;
-  background-color: #4855fe;
+  background-color: #861c1e;
   border-radius: 100%;
   font-size: 12px;
   color: #ffffff;
@@ -715,7 +715,7 @@ a:focus {
 
 .client_section .detail-box i.fa-quote-left {
   font-size: 24px;
-  color: #4855fe;
+  color: #861c1e;
 }
 
 .client_section .carousel-control-next {
@@ -735,7 +735,7 @@ a:focus {
 }
 
 .client_section .carousel-control-next:hover {
-  background-color: #4855fe;
+  background-color: #861c1e;
   color: #ffffff;
 }
 
@@ -746,14 +746,14 @@ a:focus {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: top;
-  padding-top: 245px;
-  margin-top: -175px;
+  padding-top: 25px;
+  margin-top: -30px;
 }
 
 .info_section {
   color: #ffffff;
   padding: 45px 0;
-  background-color: #b74244;
+  background-color: #861c1e;
 }
 
 .info_section .contact_box {

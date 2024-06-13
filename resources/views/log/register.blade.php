@@ -42,16 +42,24 @@
                </div>
                <label for="password">Password</label>
             </div>
+            <div class="" style="margin-bottom: 30px;font-size: 17px;">
+               <br>
+               <center>   
+                  <input type="radio" name="role" id="roleBuyer" value="Buyer" required>
+                  <label for="roleBuyer">Buyer</label> ||
+                  <input type="radio" name="role" id="roleSeller" value="Seller" required>
+                  <label for="roleSeller">Seller</label>
+               </center>
+            </div>
 
-            <input type="hidden" name="role" value="Seller">
+            {{-- <input type="hidden" name="role" value="Seller"> --}}
             
             <div class="field">
-               <input type="submit" value="Login">
+               <input type="submit" value="Register">
             </div>
             <div class="signup-link">
                Already have account? <a href="/login">Login now</a>
             </div>
-      </form>
       </form>
    </div>
    <script>

@@ -12,7 +12,7 @@
   <section class="recipe_section layout_padding-top">
     <div class="container" style="margin-bottom: 70px">
       <div class="heading_container heading_center">
-        <h2>Menu
+        <h2>List Pesanan
             
 
         </h2>
